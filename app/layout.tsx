@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { inter } from "./components/ui/fonts";
+
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "enturnicale",
-  description: "Welome to the place where you will be able to receive tokens from airdrops that will be done by users, the same things with erc-721 tokens",
+  title: "Emurno",
+  description:
+    "Welome to the place where you will be able to receive tokens from airdrops that will be done by users, the same things with erc-721 tokens, as well as  be able to be part of a community who cares and looks out for one another.",
 };
 
 export default function RootLayout({
