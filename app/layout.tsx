@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { inter } from "./components/ui/fonts";
 
 import "./globals.css";
+import MainHeader from "./components/main-header";
 
 
 export const metadata: Metadata = {
@@ -17,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <MainHeader />
+        {children}  
+      </body>
     </html>
   );
 }

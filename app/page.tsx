@@ -28,42 +28,6 @@ export default function Home() {
 
         </div>
 
-        <nav className="flex items-center gap-2 p-10 bg-[#222] mt-10 rounded-lg flex-col md:flex-row">
-
-          <Link
-            href="/mint"
-            className="bg-[#111] p-3 rounded-lg font-bold  w-full md:w-[20%] text-center md:text-left"
-          >
-            latest mint
-          </Link>
-
-          <Link
-            href="/latest"
-            className="bg-[#111] p-3 rounded-lg font-bold  w-full md:md:w-[20%] text-center md:text-left"
-          >
-            gallary
-          </Link>
-
-          <Link
-            href="/contact"
-            className="bg-[#111] p-3 rounded-lg font-bold  w-full md:md:w-[20%] text-center md:text-left"
-          >
-            contact
-          </Link>
-
-
-          <nav className="p-2 mt-4">
-            <Link
-              href="/login"
-              className="bg-[#111] p-3 rounded-lg font-bold  w-full  text-center md:text-left"
-            >
-              Login
-            </Link>
-          </nav>
-
-        </nav>
-
-
       </div>
 
       {/* Latest Collection */}

@@ -27,12 +27,14 @@ const page = () => {
 
   return (
     <section>
-      <h2>Latest collection</h2>
+      <header>
+        <h2 className='text-2xl'>Latest Collection</h2>
+      </header>
 
-      <div>
+      <div className='w-full h-full flex items-center gap-4'>
         {
           latest_collactions.map((item) => ( 
-            <div className='bg-[#222]' key=" bg-[#222]">
+            <div className='bg-[#222] w-[300px] h-[300px] text-center' key=" bg-[#222]">
                 {item.collection}
             </div>
           ))

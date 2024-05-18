@@ -1,22 +1,16 @@
 import ContactForm from "@/app/components/contact-form";
 
-
 const Page = () => {
-
-
-
-
   return (
     <main className="min-h-screen w-full bg-[#111] text-white flex items-center justify-center">
       <div className="max-w-3xl p-8 rounded-lg border-2 border-gray-800">
         <h2 className="text-3xl md:text-5xl font-bold mb-6">
-          Need a Ray of Light?
+          Need to answer a question?
         </h2>
         <p className="text-lg mb-6">
-          In the darkest moments, when you&#39;re surrounded by shadows, and the
-          world seems to have turned its back on you, I&#39;m here to be your
-          guiding light. Feel free to reach out, ask questions, or just share
-          your thoughts. We can navigate the shadows together.
+          Needsome help with your projects, designs, or just want to ask a
+          question, leave a name, title, and i guess message, and ill be able to
+          get in touch with you as soon I can.
         </p>
 
         {/* Contact Form */}

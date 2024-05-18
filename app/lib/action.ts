@@ -2,27 +2,8 @@
 
 import { User } from "../models/User";
 import dbConnect from "./db";
+import { sendMail } from "./mail";
 
-
-
-export async function whiteList(formData: FormData) {
-  const email = formData.get("email");
-
-  try {
-    await dbConnect();
-
-    const NewMember = new WaitList({
-      email: email,
-    });
-
-    await NewMember.save();
-
-    return { status: true };
-  } catch (error) {
-    console.log(error);
-    return { status: false };
-  }
-}
 
 export async function RegisterUser(
   prevState: string | undefined,
@@ -31,25 +12,12 @@ export async function RegisterUser(
   try {
     await dbConnect();
 
-    const { username, password, email, preference } =
+    const { username} =
       Object.fromEntries(formData);
 
-    const userExust = await User.findOne({ email: email as string });
 
-    if (userExust) {
-      console.log("user exists error baby girl");
-      return "user exists";
-    }
 
-    const newUser = new User({
-      username,
-      email,
-      preference,
-    });
-
-    await newUser.save();
-
-    return "Authentication success";
+    return "Authentication success " + username;
   } catch (error) {
     console.log(error);
     return "error im sorry but this entire form";
@@ -78,23 +46,14 @@ export async function ContactEmail(
   try {
     const data = Object.fromEntries(formData.entries());
 
-    const validatedFields = SendContactEmail.safeParse(data);
 
-    // console.log(validatedFields.error);
-
-    if (!validatedFields.success) {
-      return {
-        message: "seemed to have not worked properly, try again.",
-      };
-    }
-
-    const { to, name, subject, content } = validatedFields.data;
+    const { to, name, subject, content } = data;
 
     await sendMail({
       to: process.env.SMTP_EMAIL as string,
-      name: name, // get user name
-      subject,
-      content,
+      name: name as string, // get user name
+      subject: subject as string,
+      content: content as string,
     });
 
     return { message: "i am dead" };

@@ -5,8 +5,15 @@ import Image from "next/image";
 
 const LatestCollection = () => {
 
-  const handleMintCurrentCollection = async () => {
+  const handleMintCurrentCollection = async (e:any) => {
+    e.preventDefault()
+
     try {
+
+
+      console.log(e.target.mint_amount.value)
+
+
       console.log("handleing the current collection mint");
     } catch (error) {
       console.log(error);
@@ -42,35 +49,41 @@ const LatestCollection = () => {
         <div key={crypto.randomUUID()} className="bg-[#555] w-full">
           <div className="p-5">
             {/* Lattest collection */}
-            <h2 className="text-4xl font-bold">{item.collectionName}</h2>
+            <h2 className="text-4xl text-center font-bold mb-4">{item.collectionName}</h2>
+            
+            <div className="flex items-center gap-10 mb-4 md:flex-row flex-col ">
+              {/* Carrpsal */}
+              <div className="w-[250px] h-[250px] md:w-[300px] md:h-[300px] relative">
+                <Image src={item.collectionImage} alt="slow" fill />
+              </div>
 
-            {/* Carrpsal */}
-            <div className="w-[300px] h-[300px] relative">
-              <Image src={item.collectionImage} alt="slow" fill />
+              {/*  This is a collection where you can see many different symbols and meanings that you can see capture a moment within the image tell you a story.  */}
+              <p className="w-full md:w-[50%] text-xl mb-4">{item.collectionDescription}</p>
             </div>
-
-            {/*  This is a collection where you can see many different symbols and meanings that you can see capture a moment within the image tell you a story.  */}
-            <p className=" text-xl mb-4">{item.collectionDescription}</p>
 
             <a className="text-2xl font-bold bg-[#111] p-3 rounded-lg" href={`/mint/${index}`} >
               Read More
             </a>
+            
           </div>
 
           <form className="p-3" onSubmit={handleMintCurrentCollection}>
             <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg">
-              Token address: <span>{item.tokenAddress}r</span>
+              Token address: <span className="text-[.8rem]">{item.tokenAddress}r</span>
             </h2>
 
-            <input
-              type="amount"
-              placeholder="enter amount"
-              id="mint_amount"
-              name="mint_amount"
-              className="p-2 text-black"
-            />
 
-            <button className="p-2 bg-[#111] rounded-lg">enter</button>
+            <div className="w-full items-center flex justify-center gap-4">
+              <input
+                type="number"
+                placeholder="enter amount"
+                id="mint_amount"
+                name="mint_amount"
+                className="p-2 text-black rounded-lg" 
+              />
+
+              <button className="p-2 bg-[#111] rounded-lg">enter</button>
+            </div>
           </form>
         </div>
       ))}
