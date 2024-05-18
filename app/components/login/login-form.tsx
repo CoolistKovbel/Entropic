@@ -1,5 +1,7 @@
 "use client";
 
+import { getEthereumAccount } from "@/app/lib/web3";
+import { ethers } from "ethers";
 import React from "react";
 
 const LoginForm = () => {
@@ -9,7 +11,19 @@ const LoginForm = () => {
 
       const gg = e.target.secretName.value;
 
-    //   secret
+      //   secret
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+
+      const currentUserAccount = await getEthereumAccount();
+
+      let message =
+        "I am the real owner of this account thank you very much... 🐱‍💻";
+
+      let signature = await signer.signMessage(message);
+
+      const userAddress = ethers.utils.verifyMessage(message, signature);
 
       console.log("handle user login", gg);
     } catch (error) {

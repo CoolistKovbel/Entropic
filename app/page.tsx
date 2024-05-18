@@ -8,11 +8,14 @@ export default function Home() {
 
 
       <div className="flex flex-col w-full">
-        <div className="flex items-center gap-5 flex-col ">
-          <header className="bg-[#222] text-center p-4 rounded-lg w-full md:w-[60%]">
-            <h1 className="text-4xl font-bold mb-2">Emurno</h1>
 
-            <p className="text-[1rem]">
+
+        <div className="flex items-center gap-5 flex-col md:flex-row">
+
+          <header className="bg-[#222] text-center p-4 rounded-lg w-full md:w-[60%]">
+            <h1 className="text-[2.3rem] font-bold mb-2">Entropic</h1>
+
+            <p className="text-[1.0rem]">
               Welcome to a small place where you are able to mint some cool nft
               collections from the user by the user. You will also be able to
               earn rewards and trade your nfts. Get started today!
@@ -20,39 +23,47 @@ export default function Home() {
           </header>
 
           <div className="w-[300px] h-[300px] relative">
-            <Image src="/slowlifeflame.png" alt="stupid" fill />
+            <Image src="/entropic-item.png" alt="stupid" fill />
           </div>
+
         </div>
 
-        <nav className="flex items-center gap-2 p-10 bg-[#222] mt-10 rounded-lg flex-col">
+        <nav className="flex items-center gap-2 p-10 bg-[#222] mt-10 rounded-lg flex-col md:flex-row">
+
           <Link
             href="/mint"
-            className="bg-[#111] p-3 rounded-lg font-bold  w-full md:w-full text-center md:text-left"
+            className="bg-[#111] p-3 rounded-lg font-bold  w-full md:w-[20%] text-center md:text-left"
           >
             latest mint
           </Link>
+
           <Link
             href="/latest"
-            className="bg-[#111] p-3 rounded-lg font-bold  w-full md:w-full text-center md:text-left"
+            className="bg-[#111] p-3 rounded-lg font-bold  w-full md:md:w-[20%] text-center md:text-left"
           >
             gallary
           </Link>
+
           <Link
             href="/contact"
-            className="bg-[#111] p-3 rounded-lg font-bold  w-full md:w-full text-center md:text-left"
+            className="bg-[#111] p-3 rounded-lg font-bold  w-full md:md:w-[20%] text-center md:text-left"
           >
             contact
           </Link>
 
+
           <nav className="p-2 mt-4">
             <Link
               href="/login"
-              className="bg-[#111] p-3 rounded-lg font-bold  w-full md:w-full text-center md:text-left"
+              className="bg-[#111] p-3 rounded-lg font-bold  w-full  text-center md:text-left"
             >
               Login
             </Link>
           </nav>
+
         </nav>
+
+
       </div>
 
       {/* Latest Collection */}

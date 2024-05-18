@@ -1,5 +1,8 @@
 "use server";
 
+import { User } from "../models/User";
+import dbConnect from "./db";
+
 
 
 export async function whiteList(formData: FormData) {
@@ -38,11 +41,8 @@ export async function RegisterUser(
       return "user exists";
     }
 
-    const hashPassword = await hash(password as string, 10);
-
     const newUser = new User({
       username,
-      password: hashPassword,
       email,
       preference,
     });
@@ -105,3 +105,4 @@ export async function ContactEmail(
 }
 
 
+export async function handleLogin(formData: FormData) {}
