@@ -1,13 +1,19 @@
 "use client";
 
+import dbConnect from "@/app/lib/db";
 import { getEthereumAccount } from "@/app/lib/web3";
 import { ethers } from "ethers";
 import React from "react";
 
 const LoginForm = () => {
+
+
+  
   const handleUserLogin = async (e: any) => {
     try {
       e.preventDefault();
+
+      await dbConnect()
 
       const gg = e.target.secretName.value;
 
@@ -19,13 +25,20 @@ const LoginForm = () => {
       const currentUserAccount = await getEthereumAccount();
 
       let message =
-        "I am the real owner of this account thank you very much... 🐱‍💻";
+        "i am sad and massive feeling hate.. 🐱‍💻";
 
       let signature = await signer.signMessage(message);
 
       const userAddress = ethers.utils.verifyMessage(message, signature);
 
-      console.log("handle user login", gg);
+      console.log("handle user login", userAddress);
+
+
+
+
+        console.log(userAddress)
+
+
     } catch (error) {
       console.log(error);
     }

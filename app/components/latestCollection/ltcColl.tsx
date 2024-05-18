@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 
 const LatestCollection = () => {
+
   const handleMintCurrentCollection = async () => {
     try {
       console.log("handleing the current collection mint");
@@ -37,7 +38,7 @@ const LatestCollection = () => {
 
   return (
     <div className="w-full bg-[#222] p-4 h-fit mt-4  flex flex-col gap-10">
-      {latestCollection.map((item) => (
+      {latestCollection.map((item, index) => (
         <div key={crypto.randomUUID()} className="bg-[#555] w-full">
           <div className="p-5">
             {/* Lattest collection */}
@@ -51,7 +52,7 @@ const LatestCollection = () => {
             {/*  This is a collection where you can see many different symbols and meanings that you can see capture a moment within the image tell you a story.  */}
             <p className=" text-xl mb-4">{item.collectionDescription}</p>
 
-            <a className="text-2xl font-bold bg-[#111] p-3 rounded-lg">
+            <a className="text-2xl font-bold bg-[#111] p-3 rounded-lg" href={`/mint/${index}`} >
               Read More
             </a>
           </div>
