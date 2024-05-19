@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 interface IUser {
   username: string;
+  useraccount: any;
   seacretPhase: string;
   secretKey: string;
   secretSignature: string;
@@ -14,23 +15,18 @@ const UserSchema = new mongoose.Schema<IUser>(
   {
     username: {
       type: String,
-      min: 4,
-      max: 24,
-      require: true,
-      unique: true
     },
     seacretPhase: {
       type: String,
-      require: true,
-      unique: true
     },
     secretKey: {
       type: String,
-      require: true,
+    },
+    useraccount: {
+      type: String
     },
     secretSignature: {
       type: String,
-      require: true,
     },
     image: {
       type: String,

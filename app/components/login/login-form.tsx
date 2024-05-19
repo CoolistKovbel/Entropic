@@ -1,16 +1,18 @@
 "use client";
 
 import { handleLogin } from "@/app/lib/action";
-import dbConnect from "@/app/lib/db";
 import { getEthereumAccount } from "@/app/lib/web3";
 import { ethers } from "ethers";
-import React from "react";
 
 const LoginForm = () => {
+  
+  
+  // Login
+  
+  // Handle user login
   const handleUserLogin = async (e: any) => {
     try {
       e.preventDefault();
-      
       const gg = e.target.secretName.value;
 
       //   secret
@@ -18,31 +20,18 @@ const LoginForm = () => {
       const signer = provider.getSigner();
 
       const currentUserAccount = await getEthereumAccount();
-
       let message = `You are the current account holder signing at ${Date.now()}`;
-
       let signature = await signer.signMessage(message);
-
       const userAddress = ethers.utils.verifyMessage(message, signature);
-
       console.log("handle user login", userAddress);
 
-      const payload = {
-        userAddress,
-        gg,
-        currentUserAccount,
-        signature
-      }
+      const formData = new FormData();
+      formData.append("userAddress", userAddress);
+      formData.append("gg", gg);
+      formData.append("useraccount", currentUserAccount);
+      formData.append("simple", signature);
+      const g = await handleLogin(formData);
 
-
-      const formData = new FormData()
-      
-      formData.append(userAddress, "userAddress")
-      formData.append(gg, "value")
-      formData.append(currentUserAccount, "useraccount")
-      formData.append(signature, "simple mother fucking trransction")
-
-      console.log("slowlife")
 
     } catch (error) {
       console.log(error);
@@ -54,6 +43,7 @@ const LoginForm = () => {
       className="w-full flex-col flex items-center gap-4"
       onSubmit={handleUserLogin}
     >
+
       <input
         type="text"
         placeholder="enter secret name"
@@ -61,7 +51,9 @@ const LoginForm = () => {
         id="secretName"
         name="secretName"
       />
+
       <button className="bg-[#000] p-2 rounded-lg">sign</button>
+
     </form>
   );
 };

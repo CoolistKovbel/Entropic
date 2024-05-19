@@ -9,10 +9,7 @@ const LatestCollection = () => {
     e.preventDefault()
 
     try {
-
-
       console.log(e.target.mint_amount.value)
-
 
       console.log("handleing the current collection mint");
     } catch (error) {
@@ -38,6 +35,52 @@ const LatestCollection = () => {
       collectionImage: "/entropic-item.png",
       collectionDescription:
         "Welcome to the marketplace that allow you to trade between different types of nfts that are either items from different games, or club collectables, or items that you just want to seem to add to your collection of tokens. By holding this token you hold benifit of earning 1% trade fee from each transfers and  elgiable to put to stake to earn more rewards.",
+    },
+    {
+      collectionName: "EpeticlePet Handle",
+      collectionImageIpfs: "/Q",
+      tokenAddress: "0",
+      collectionRewardToken: "0",
+      collectionImage: "/",
+      collectionDescription:
+        "EpeticlePet is an online service and vendor for your pets where you can get yourself pet supplies using the reward token this token allows you to generate."
+    },
+    {
+      collectionName: "Pinote",
+      collectionImageIpfs: "/Q",
+      tokenAddress: "0",
+      collectionRewardToken: "0",
+      collectionImage: "/",
+      collectionDescription:
+        "d"
+    },
+    {
+      collectionName: "MysticMurko",
+      collectionImageIpfs: "/Q",
+      tokenAddress: "0",
+      collectionRewardToken: "0",
+      collectionImage: "/",
+      collectionDescription:
+        "d"
+    },
+    {
+      collectionName: "PhotuneLightway",
+      collectionImageIpfs: "/Q",
+      tokenAddress: "0",
+      collectionRewardToken: "0",
+      collectionImage: "/",
+      collectionDescription:
+        "d"
+    },
+    {
+      collectionName: "PrimeBlossomVault",
+      link: "https://www.primeblossomdeapp.com/",
+      collectionImageIpfs: "/Q",
+      tokenAddress: "0",
+      collectionRewardToken: "0",
+      collectionImage: "/",
+      collectionDescription:
+        "d"
     },
   ];
 
