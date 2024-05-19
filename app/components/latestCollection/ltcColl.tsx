@@ -69,7 +69,7 @@ const LatestCollection = () => {
 
           <form className="p-3" onSubmit={handleMintCurrentCollection}>
             <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg">
-              Token address: <span className="text-[.8rem]">{item.tokenAddress}r</span>
+              Token address: <span className="text-[.8rem]">{item.tokenAddress}</span>
             </h2>
 
 

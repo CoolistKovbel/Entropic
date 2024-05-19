@@ -12,7 +12,7 @@ const MainHeader = () => {
       </Link>
 
       <Link
-        href="/latest"
+        href="/gallary"
         className="bg-[#111] p-3 rounded-lg font-bold  w-full md:md:w-[20%] text-center md:text-left"
       >
         gallary

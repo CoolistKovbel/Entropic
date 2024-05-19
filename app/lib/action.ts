@@ -1,28 +1,12 @@
 "use server";
 
+import { getIronSession } from "iron-session";
 import { User } from "../models/User";
-import dbConnect from "./db";
+
 import { sendMail } from "./mail";
-
-
-export async function RegisterUser(
-  prevState: string | undefined,
-  formData: FormData
-) {
-  try {
-    await dbConnect();
-
-    const { username} =
-      Object.fromEntries(formData);
-
-
-
-    return "Authentication success " + username;
-  } catch (error) {
-    console.log(error);
-    return "error im sorry but this entire form";
-  }
-}
+import { SessionData, sessionOptions } from "./dictionary";
+import { cookies } from "next/headers";
+import dbConnect from "./db";
 
 const hadleImageUpload = async (image: any) => {
   const fileBuffer = await (image as File).arrayBuffer();
@@ -37,7 +21,6 @@ const hadleImageUpload = async (image: any) => {
   return path.split(`${process.cwd()}/public/`)[1];
 };
 
-
 export async function ContactEmail(
   id: string,
   prevState: string | object | undefined,
@@ -45,7 +28,6 @@ export async function ContactEmail(
 ) {
   try {
     const data = Object.fromEntries(formData.entries());
-
 
     const { to, name, subject, content } = data;
 
@@ -63,5 +45,22 @@ export async function ContactEmail(
   }
 }
 
+// get user currentsession
+export const getSession = async () => {
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
 
-export async function handleLogin(formData: FormData) {}
+  if (!session.isLoggedIn) {
+    session.isLoggedIn = defaultSession.isLoggedIn;
+  }
+
+  return session;
+};
+
+export async function handleLogin(formData: FormData) {
+  const {secretName} = Object.fromEntries(formData);
+  try {
+    console.log("Kill my self", secretName);
+  } catch (error) {
+    console.log(error);
+  }
+}

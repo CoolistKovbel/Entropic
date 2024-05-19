@@ -1,31 +1,25 @@
 "use client";
 
+import { handleLogin } from "@/app/lib/action";
 import dbConnect from "@/app/lib/db";
 import { getEthereumAccount } from "@/app/lib/web3";
 import { ethers } from "ethers";
 import React from "react";
 
 const LoginForm = () => {
-
-
-  
   const handleUserLogin = async (e: any) => {
     try {
       e.preventDefault();
-
-      await dbConnect()
-
+      
       const gg = e.target.secretName.value;
 
       //   secret
-
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
 
       const currentUserAccount = await getEthereumAccount();
 
-      let message =
-        "i am sad and massive feeling hate.. 🐱‍💻";
+      let message = `You are the current account holder signing at ${Date.now()}`;
 
       let signature = await signer.signMessage(message);
 
@@ -33,11 +27,22 @@ const LoginForm = () => {
 
       console.log("handle user login", userAddress);
 
+      const payload = {
+        userAddress,
+        gg,
+        currentUserAccount,
+        signature
+      }
 
 
+      const formData = new FormData()
+      
+      formData.append(userAddress, "userAddress")
+      formData.append(gg, "value")
+      formData.append(currentUserAccount, "useraccount")
+      formData.append(signature, "simple mother fucking trransction")
 
-        console.log(userAddress)
-
+      console.log("slowlife")
 
     } catch (error) {
       console.log(error);
