@@ -45,45 +45,40 @@ export async function ContactEmail(
   }
 }
 
-
 export async function handleLogin(formData: FormData) {
-  const { gg, simple, useraccount, userAddress } = Object.fromEntries(formData);
+  const { seacretPhase, simple, useraccount } = Object.fromEntries(formData);
   try {
     await dbConnect();
 
-    console.log(useraccount, "stupid")
-    
-    const userExist = await User.find({useraccount: useraccount})
-    
-    console.log(userExist, "stupid")
+    console.log(useraccount, "stupid");
 
-    let user:any;
+    const userExist = await User.find({ useraccount: useraccount });
 
-    if(userExist) {
+    console.log(userExist.length, "stupid");
+    console.log(simple, "stupid");
+    console.log(seacretPhase, "stupid");
+
+    let user: any;
+
+    if (userExist.length === 0) {
 
       user = new User({
-        seacretPhase: gg,
+        seacretPhase: seacretPhase as string,
         secretSignature: simple,
-        userAddress: useraccount,
-        username: userAddress
+        username: useraccount,
       });
 
       const account = await user.save();
-      return account
-  
+
+      return account;
+
     } else {
-
-      console.log(userExist, "there is user")
-      console.log(useraccount, "there is user")
-
-      console.log("hate my life")
+      console.log(userExist, "there is user");
     }
-
-    
 
     // okooo
   } catch (error) {
     console.log(error);
-    return "error signing in"
+    return "error signing in";
   }
 }

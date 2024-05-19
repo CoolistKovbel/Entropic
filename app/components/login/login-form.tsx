@@ -6,9 +6,6 @@ import { ethers } from "ethers";
 
 const LoginForm = () => {
   
-  
-  // Login
-  
   // Handle user login
   const handleUserLogin = async (e: any) => {
     try {
@@ -26,8 +23,8 @@ const LoginForm = () => {
       console.log("handle user login", userAddress);
 
       const formData = new FormData();
-      formData.append("userAddress", userAddress);
-      formData.append("gg", gg);
+      formData.append("user", userAddress);
+      formData.append("seacretPhase", gg);
       formData.append("useraccount", currentUserAccount);
       formData.append("simple", signature);
       const g = await handleLogin(formData);
