@@ -5,12 +5,10 @@ import { getEthereumAccount } from "@/app/lib/web3";
 import { ethers } from "ethers";
 
 const LoginForm = () => {
-  
   // Handle user login
   const handleUserLogin = async (e: any) => {
     try {
       e.preventDefault();
-      const gg = e.target.secretName.value;
 
       //   secret
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -20,16 +18,18 @@ const LoginForm = () => {
       let message = `You are the current account holder signing at ${Date.now()}`;
       let signature = await signer.signMessage(message);
       const userAddress = ethers.utils.verifyMessage(message, signature);
+
       console.log("handle user login", userAddress);
 
-      const formData = new FormData();
-      formData.append("user", userAddress);
-      formData.append("seacretPhase", gg);
-      formData.append("useraccount", currentUserAccount);
-      formData.append("simple", signature);
-      const g = await handleLogin(formData);
+      const payload: any = {
+        userAddress,
+        currentUserAccount,
+        signature,
+      };
 
+      const g = await handleLogin(payload);
 
+      console.log(g);
     } catch (error) {
       console.log(error);
     }
@@ -40,17 +40,9 @@ const LoginForm = () => {
       className="w-full flex-col flex items-center gap-4"
       onSubmit={handleUserLogin}
     >
+      <p>Have metamask download</p>
 
-      <input
-        type="text"
-        placeholder="enter secret name"
-        className="p-2 text-black w-full rounded-lg"
-        id="secretName"
-        name="secretName"
-      />
-
-      <button className="bg-[#000] p-2 rounded-lg">sign</button>
-
+      <button className="bg-[#000] p-2 rounded-lg">sign in</button>
     </form>
   );
 };

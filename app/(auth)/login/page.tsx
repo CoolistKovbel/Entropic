@@ -12,8 +12,6 @@ const Page = () => {
 
       <div className="flex items-center flex-col gap-4 p-10 bg-[#222]">
         <LoginForm />
-
-        <LoginSign />
       </div>
     </main>
   );
