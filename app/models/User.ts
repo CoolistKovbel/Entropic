@@ -18,7 +18,6 @@ const UserSchema = new mongoose.Schema<IUser>(
     },
     seacretPhase: {
       type: String,
-      unique: true
     },
     email: {
       type: String,

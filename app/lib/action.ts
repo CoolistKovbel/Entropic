@@ -73,27 +73,29 @@ export async function handleLogin(formData: any) {
       session.userId = userExist._id.toString();
       session.username = userExist.username;
       session.email = userExist.email as string;
+      session.isLoggedIn = true;
 
       await session.save();
 
       return { status: "new", session };
+    } else {
+      // If user does not exist, create a new user
+      const user = new User({
+        secretSignature: signature,
+        username: currentUserAccount,
+      });
+
+      const account = await user.save();
+
+      // Create a session for the new user
+      const session = await getSession();
+      session.userId = user._id.toString();
+      session.username = user.username;
+      session.email = user.email as string;
+      session.isLoggedIn = true;
+
+      return { status: "new", account };
     }
-
-    // If user does not exist, create a new user
-    const user = new User({
-      secretSignature: signature,
-      username: currentUserAccount,
-    });
-
-    const account = await user.save();
-
-    // Create a session for the new user
-    const session = await getSession();
-    session.userId = user._id.toString();
-    session.username = user.username;
-    session.email = user.email as string;
-
-    return { status: "new", account };
   } catch (error) {
     console.log(error);
     return { status: "error" };

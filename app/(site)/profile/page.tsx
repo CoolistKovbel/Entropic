@@ -1,8 +1,14 @@
 import Image from "next/image";
-import React from "react";
+
 
 const Page = () => {
+
   const isLogged = false;
+
+  const userProfile = {
+    userAddress: "0xasd23fwefvsdv",
+    userProfileImage: "/ephonite.png"
+  }
 
   const userNFTArray = [
     {
@@ -12,21 +18,30 @@ const Page = () => {
   ];
 
   return (
-    <main>
+    <main className="p-10 bg-[#444]">
       <h2 className="text-2xl">Profile Page</h2>
 
       <div>
-        <h2 className="text-2xl">0x12312</h2>
-
+        {/* user add */}
+        <h2 className="text-2xl">{userProfile.userAddress}</h2>
+        
+        {/* image */}
         <div className="w-[300px] h-[300px] relative">
-          <Image src="/ephonite.png" alt="nft collection item" fill />
+          <Image src={userProfile.userProfileImage} alt="nft collection item" fill />
+        </div>
+
+        <div className="text-sm p-4">
+          <p className="text-lg uppercase">Amount own: 0</p>
+          <p className="text-lg uppercase">Total Value: 0</p>
+          <p className="text-lg uppercase">trades: 0</p>
+          <p className="text-lg uppercase">TrustScore: 0</p>
         </div>
       </div>
 
       <div>
-        <h2 className="text-2xl">Recent purchases NFT</h2>
+        <h2 className="text-3xl">Recent purchases NFT amount {userNFTArray.length}</h2>
 
-        <div>
+        <div className="p-3 bg-[#222]">
           {userNFTArray.map((item) => (
             <div
               key={crypto.randomUUID()}
@@ -35,10 +50,7 @@ const Page = () => {
               <Image src="/" alt="nft colletion item" fill />
             </div>
           ))}
-          {/* nft1 */}
 
-          {/* nft2 */}
-          {/* nft3 */}
         </div>
       </div>
     </main>
