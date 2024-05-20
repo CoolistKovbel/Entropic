@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useModal } from "@/app/hooks/use-modal-store";
 import { useRouter } from "next/navigation";
-
 import { ethers } from "ethers";
 
 const CreateNFTListingtsxModel = () => {
@@ -19,21 +18,24 @@ const CreateNFTListingtsxModel = () => {
     }
   };
 
-  const onSubmit = async (values: any) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
-      const data = new FormData();
+      const formData = new FormData(e.currentTarget);
 
-      const channelName = values.name;
-      const channelCost = ethers.utils.parseEther(values.cost);
+      const channelName = formData.get('name') as string;
+      const channelCost = ethers.utils.parseEther(formData.get('cost') as string);
       const channelImage = deFile;
 
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
 
-      //   const contract = new ethers.Contract(contractAddress, contractABI, signer);
+      // Interact with the contract using the signer
 
       const etherValue = ethers.utils.formatEther(channelCost.toString());
       const weiValue = ethers.utils.parseEther(etherValue);
+
+      // Perform the necessary actions with the contract
 
       router.refresh();
       onClose();
@@ -42,14 +44,39 @@ const CreateNFTListingtsxModel = () => {
     }
   };
 
-  const handleClose = () => {
-    onClose();
-  };
-
   return (
-    <dialog open={isModalOpen} onChange={handleClose}>
-      <div>Hlelo</div>
-    </dialog>
+    <div className={`fixed inset-0 flex items-center justify-center ${isModalOpen ? 'block' : 'hidden'}`}>
+      <div className="fixed inset-0 bg-black opacity-50" onClick={onClose}></div>
+      <dialog open={isModalOpen} className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <form onSubmit={onSubmit}>
+          <h2 className="text-2xl font-bold mb-4">Create NFT Listing</h2>
+          <label className="block mb-2">
+            Name:
+            <input type="text" name="name" required className="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+          </label>
+          <label className="block mb-2">
+            Description:
+            <input type="text" name="name" required className="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+          </label>
+          <label className="block mb-2">
+            Address:
+            <input type="text" name="name" required className="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+          </label>
+          <label className="block mb-2">
+            Cost:
+            <input type="text" name="cost" required className="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+          </label>
+          <label className="block mb-4">
+            Fan,Community, Default banner:
+            <input type="file" onChange={handleFileChange} className="mt-1 block w-full" />
+          </label>
+          <div className="flex justify-end space-x-4">
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg">Submit</button>
+            <button type="button" onClick={onClose} className="bg-gray-500 text-white px-4 py-2 rounded-lg">Close</button>
+          </div>
+        </form>
+      </dialog>
+    </div>
   );
 };
 

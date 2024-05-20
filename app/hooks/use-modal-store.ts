@@ -1,7 +1,7 @@
 
 import { create } from "zustand";
 
-export type ModalType = "createNewChannel" | "createNewAnnouncement"
+export type ModalType = "CreateNFTListingtsxModel"
 
 interface ModalData {
   channel?: any;

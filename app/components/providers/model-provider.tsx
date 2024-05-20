@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import CreateNFTListingtsxModel from "../models/createNFTListing";
 
-export const ModalProvider = () => {
+export const  ModalProvider = () => {
   const [isMounted, setIsmounted] = useState(false);
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { inter } from "./components/ui/fonts";
 
 import "./globals.css";
 import MainHeader from "./components/header/main-header";
-
+import { ModalProvider } from "./components/providers/model-provider";
 
 export const metadata: Metadata = {
   title: "EntropicScene",
@@ -20,10 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <MainHeader />
-        {children}  
+        {children}
       </body>
+     
     </html>
   );
 }
-
-
