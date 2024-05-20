@@ -37,7 +37,6 @@ const LoginForm = () => {
 
       const response = await handleLogin(payload);
 
-      console.log(response);
 
       if (response.status === "new" || response.status === "exists") {
         // Redirect to profile page on successful login
