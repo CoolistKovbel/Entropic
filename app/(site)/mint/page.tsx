@@ -1,31 +1,41 @@
+
+import { getSession } from "@/app/lib/action";
 import Image from "next/image";
 
+const page = async () => {
 
-const page = () => {
-
-  const isLogged = true
-
+  const userIsLogged = await getSession();
+  
+  
 
   return (
     <section className="w-full min-h-screen p-4">
+      {userIsLogged.isLoggedIn && (
+        <div className="flex items-center justify-between mb-3">
+          <a
+            href="/nft"
+            className="bg-[#222] p-3 rounded-lg hover:bg-[#222] hover:bg-[#111]"
+          >
+            create nft
+          </a>
+          <a
+            href="/nft-view"
+            className="bg-[#222] p-3 rounded-lg hover:bg-[#222] hover:bg-[#111]"
+          >
+            view minted
+          </a>
+        </div>
+      )}
 
-      {
-        isLogged && (
-          <div className="flex items-center justify-between mb-3">
-              <a href="/nft" className="bg-[#222] p-3 rounded-lg hover:bg-[#222]">create nft</a>
-              <a href="/nft-view" className="bg-[#222] p-3 rounded-lg hover:bg-[#222]">view minted</a>
-          </div>
-        )
-      }
-   
       <header className="w-full bg-[#222]">
         <h2 className="text-2xl p-3 font-bold bg-[#333]">Latest mint</h2>
 
         {/* Collection */}
         <div className="flex items-center gap-4 p-4 bg-[#444]">
-
           <div className="w-[50%]">
-            <h2 className="text-3xl p-1 mb-2 text-center">Ephonite Collection</h2>
+            <h2 className="text-3xl p-1 mb-2 text-center">
+              Ephonite Collection
+            </h2>
             <div className="w-[300px] h-[300px] relative">
               <Image src="/ephonite.png" alt="art concept nft" fill />
             </div>
@@ -35,21 +45,21 @@ const page = () => {
             <h3 className="text-2xl">Total Mint: 222</h3>
             <p>Contract Address: 0x31e</p>
             <p className="text-sm">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, velit
-              optio dolorum deserunt qui numquam molestias! Debitis eaque iste
-              ipsam vero, rem animi! Iusto debitis reprehenderit a, libero
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
+              velit optio dolorum deserunt qui numquam molestias! Debitis eaque
+              iste ipsam vero, rem animi! Iusto debitis reprehenderit a, libero
               excepturi impedit!
             </p>
 
-            <a href="/mint/4" className="bg-[#111] font-bold rounded-lg p-2 hover:bg-[#444]">Learn More</a>
+            <a
+              href="/mint/4"
+              className="bg-[#111] font-bold rounded-lg p-2 hover:bg-[#444]"
+            >
+              Learn More
+            </a>
           </div>
-
         </div>
-
-
       </header>
-
-
     </section>
   );
 };
