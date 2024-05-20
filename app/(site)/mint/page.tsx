@@ -1,9 +1,22 @@
 import Image from "next/image";
-import React from "react";
+
 
 const page = () => {
+
+  const isLogged = true
+
+
   return (
     <section className="w-full min-h-screen p-4">
+
+      {
+        isLogged && (
+          <div className="flex items-center justify-between mb-3">
+              <a href="/nft" className="bg-[#222] p-3 rounded-lg hover:bg-[#222]">create nft</a>
+              <a href="/nft-view" className="bg-[#222] p-3 rounded-lg hover:bg-[#222]">view minted</a>
+          </div>
+        )
+      }
    
       <header className="w-full bg-[#222]">
         <h2 className="text-2xl p-3 font-bold bg-[#333]">Latest mint</h2>
@@ -35,6 +48,8 @@ const page = () => {
 
 
       </header>
+
+
     </section>
   );
 };

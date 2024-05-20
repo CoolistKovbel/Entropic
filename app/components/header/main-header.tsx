@@ -1,7 +1,11 @@
 import Link from "next/link";
 import React from "react";
+import { getSession } from "../../lib/action";
+import HeadernNav from "./headernav";
 
-const MainHeader = () => {
+const MainHeader = async () => {
+  const user = await getSession();
+
   return (
     <nav className="flex items-center gap-2 bg-[#222] p-4 rounded-lg flex-col md:flex-row">
       <Link
@@ -32,14 +36,7 @@ const MainHeader = () => {
         contact
       </Link>
 
-      <nav className="p-2 ">
-        <Link
-          href="/login"
-          className="bg-[#111] p-3 rounded-lg font-bold  w-full  text-center md:text-left"
-        >
-          Login
-        </Link>
-      </nav>
+      <HeadernNav user={user} />
     </nav>
   );
 };

@@ -4,7 +4,7 @@ interface IUser {
   username: string;
   useraccount: any;
   seacretPhase: string;
-  secretKey: string;
+  email: string;
   secretSignature: string;
   image: string;
 }
@@ -18,8 +18,9 @@ const UserSchema = new mongoose.Schema<IUser>(
     },
     seacretPhase: {
       type: String,
+      unique: true
     },
-    secretKey: {
+    email: {
       type: String,
     },
     useraccount: {

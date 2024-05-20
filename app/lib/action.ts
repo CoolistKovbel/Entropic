@@ -4,9 +4,20 @@ import { getIronSession } from "iron-session";
 import { User } from "../models/User";
 
 import { sendMail } from "./mail";
-import { SessionData, sessionOptions } from "./dictionary";
+import { SessionData, defaultSession, sessionOptions } from "./dictionary";
 import { cookies } from "next/headers";
 import dbConnect from "./db";
+import { redirect } from "next/navigation";
+
+export const getSession = async () => {
+  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
+
+  if (!session.isLoggedIn) {
+    session.isLoggedIn = defaultSession.isLoggedIn;
+  }
+
+  return session;
+};
 
 const hadleImageUpload = async (image: any) => {
   const fileBuffer = await (image as File).arrayBuffer();
@@ -47,31 +58,50 @@ export async function ContactEmail(
 
 export async function handleLogin(formData: any) {
   const { userAddress, currentUserAccount, signature } = formData;
+
   try {
+    // Connect to the database
     await dbConnect();
 
-    const userExist = await User.find({ useraccount: currentUserAccount });
+    // Check if the user already exists
+    const userExist = await User.findOne({ username: currentUserAccount });
 
-    if (userExist.length) return "you already createded one stupid";
-    
-    let user: any;
+    if (userExist) {
+      // Create a session for the new user
+      const session = await getSession();
 
-    if (userExist.length === 0) {
-      user = new User({
-        secretSignature: signature as string,
-        username: currentUserAccount as string,
-      });
+      session.userId = userExist._id.toString();
+      session.username = userExist.username;
+      session.email = userExist.email as string;
 
-      const account = await user.save();
+      await session.save();
 
-      return account;
-    } else {
-      console.log(userExist, "there is user");
+      return { status: "new", session };
     }
 
-    // okooo
+    // If user does not exist, create a new user
+    const user = new User({
+      secretSignature: signature,
+      username: currentUserAccount,
+    });
+
+    const account = await user.save();
+
+    // Create a session for the new user
+    const session = await getSession();
+    session.userId = user._id.toString();
+    session.username = user.username;
+    session.email = user.email as string;
+
+    return { status: "new", account };
   } catch (error) {
     console.log(error);
-    return "error signing in";
+    return { status: "error" };
   }
 }
+
+export const logout = async () => {
+  const session = await getSession();
+  session.destroy();
+  redirect("/");
+};
