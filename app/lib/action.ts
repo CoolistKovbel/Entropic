@@ -8,6 +8,7 @@ import { SessionData, defaultSession, sessionOptions } from "./dictionary";
 import { cookies } from "next/headers";
 import dbConnect from "./db";
 import { redirect } from "next/navigation";
+import { writeFile } from "fs/promises";
 
 export const getSession = async () => {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
