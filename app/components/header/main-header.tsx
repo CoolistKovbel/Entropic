@@ -38,6 +38,13 @@ const MainHeader = async () => {
         contact
       </Link>
 
+      <Link
+        href="/"
+        className="bg-[#111] p-3 rounded-lg font-bold  w-full md:md:w-[20%] text-center md:text-left"
+      >
+        🎛️
+      </Link>
+
       <HeadernNav user={user} />
     </nav>
   );
