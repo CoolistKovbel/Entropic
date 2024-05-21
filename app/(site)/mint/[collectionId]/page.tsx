@@ -1,12 +1,32 @@
+import Image from "next/image";
 import React from "react";
 
 const Page = () => {
+
+
+
+
+  const collection = {
+    collectionName: "Name",
+    collectionImageIpfs: "ipfs://",
+    tokenAddress: "0x",
+    collectionImage: "/page.url",
+    collectionDescription: "descroption"
+  }
+
+
+
+
+
+
   return (
     <main className="p-4">
-      <h2 className="text-2xl">Latest Collection</h2>
+      <div className="w-[300px] h-[300px]">
+        <Image src={collection.collectionImage} alt="nft collection image" fill />
+      </div>
+      <h2 className="text-2xl">{collection.collectionName}</h2>
       <p className="text-sm">
-        Here you can see all the latest collections that you and others have
-        listest, that will allow you to be purchase or initilize a trade.
+        {collection.collectionDescription}
       </p>
     </main>
   );

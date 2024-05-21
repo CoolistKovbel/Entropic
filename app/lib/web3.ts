@@ -70,32 +70,32 @@ export const mintNFT = async (_amount: any) => {
   }
 };
 
-export const swapToken = async (_amount: any) => {
-  try {
-    console.log("swapping token");
+// export const swapToken = async (_amount: any) => {
+//   try {
+//     console.log("swapping token");
 
-    const amountInWei = ethers.utils.parseEther(_amount.toString());
+//     const amountInWei = ethers.utils.parseEther(_amount.toString());
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+//     const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    // Get the signer
-    const signer = provider.getSigner();
+//     // Get the signer
+//     const signer = provider.getSigner();
 
-    // Contract main
-    const contractInstance = new ethers.Contract(
-      contractTokenContract,
-      tokenABI,
-      signer
-    );
+//     // Contract main
+//     const contractInstance = new ethers.Contract(
+//       contractTokenContract,
+//       tokenABI,
+//       signer
+//     );
 
-    await contractInstance.swapEtherForTokens({
-      value: amountInWei,
-      gasLimit: 600000,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     await contractInstance.swapEtherForTokens({
+//       value: amountInWei,
+//       gasLimit: 600000,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const userOwns = async () => {
   try {

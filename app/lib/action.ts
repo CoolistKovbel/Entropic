@@ -103,8 +103,49 @@ export async function handleLogin(formData: any) {
   }
 }
 
+export async function handleNftScrape() {
+  try {
+    console.log("stppid");
+  } catch (error) {
+    console.log("error");
+  }
+}
+
 export const logout = async () => {
   const session = await getSession();
   session.destroy();
   redirect("/");
 };
+
+// Handle user listing nft
+export async function handleNFTListing(formData: FormData) {
+
+  const { name, description, address, cost, imageBanner } =
+    Object.fromEntries(formData);
+
+  try {
+
+    console.log("grabbing nft data from user");
+
+    const payload = [
+      {
+        name,
+        description,
+        address,
+        cost,
+        imageBanner,
+      },
+    ];
+
+
+    // Client input data
+    console.log(payload);
+
+    return "ok";
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Hanle user liking listing

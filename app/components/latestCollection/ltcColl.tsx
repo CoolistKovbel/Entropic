@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 
 const LatestCollection = () => {
@@ -16,6 +16,9 @@ const LatestCollection = () => {
       console.log(error);
     }
   };
+
+
+  // Grab useEffect
 
   const latestCollection = [
     {
@@ -83,6 +86,15 @@ const LatestCollection = () => {
         "d"
     },
   ];
+
+  useEffect(() => {
+
+
+
+
+
+
+  } ,[])
 
                                                
 

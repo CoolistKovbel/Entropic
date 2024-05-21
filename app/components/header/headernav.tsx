@@ -9,6 +9,7 @@ interface HeaderNav {
 }
 
 const HeadernNav = ({ user }: HeaderNav) => {
+  
   const [handleMint, setHandleMint] = useState(user.length > 0);
   const [handleDrop, setHandleDrop] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -57,8 +58,11 @@ const HeadernNav = ({ user }: HeaderNav) => {
           <button onClick={handleDropDown}>↓</button>
           {handleDrop && (
             <div className="absolute top-0 right-0 bg-[#222] w-[200px] h-[300px] p-4">
+             
               <Link href="/profile" className="text-md p-2 bg-[#333] w-full block text-center font-bold">Profile</Link>
+              
               <LogoutButton />
+
             </div>
           )}
         </div>

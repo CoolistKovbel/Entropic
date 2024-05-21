@@ -22,7 +22,7 @@ export default function RootLayout({
         <MainHeader />
         {children}
       </body>
-     
+      <ModalProvider />
     </html>
   );
 }
