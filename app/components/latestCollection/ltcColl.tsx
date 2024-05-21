@@ -90,6 +90,7 @@ const LatestCollection = () => {
     <div className="w-full bg-[#222] p-4 h-fit mt-4  flex flex-col gap-10">
       {latestCollection.map((item, index) => (
         <div key={crypto.randomUUID()} className="bg-[#555] w-full">
+
           <div className="p-5">
             {/* Lattest collection */}
             <h2 className="text-4xl text-center font-bold mb-4">{item.collectionName}</h2>
@@ -102,6 +103,7 @@ const LatestCollection = () => {
 
               {/*  This is a collection where you can see many different symbols and meanings that you can see capture a moment within the image tell you a story.  */}
               <p className="w-full md:w-[50%] text-xl mb-4">{item.collectionDescription}</p>
+              
             </div>
 
             <a className="text-2xl font-bold bg-[#111] p-3 rounded-lg" href={`/mint/${index}`} >
@@ -111,6 +113,7 @@ const LatestCollection = () => {
           </div>
 
           <form className="p-3" onSubmit={handleMintCurrentCollection}>
+
             <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg">
               Token address: <span className="text-[.8rem]">{item.tokenAddress}</span>
             </h2>
@@ -127,7 +130,9 @@ const LatestCollection = () => {
 
               <button className="p-2 bg-[#111] rounded-lg">enter</button>
             </div>
+
           </form>
+
         </div>
       ))}
     </div>

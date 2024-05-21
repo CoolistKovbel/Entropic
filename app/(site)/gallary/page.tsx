@@ -26,15 +26,16 @@ const page = () => {
 
 
   return (
-    <section>
-      <header>
+    <section className='p-5'>
+
+      <header className='mb-4'>
         <h2 className='text-2xl'>Latest Collection</h2>
       </header>
 
-      <div className='w-full h-full flex items-center gap-4'>
+      <div className='w-full h-full flex items-center gap-4 flex-col md:flex-row'>
         {
           latest_collactions.map((item) => ( 
-            <div className='bg-[#222] w-[300px] h-[300px] text-center' key=" bg-[#222]">
+            <div className='bg-[#222] w-[300px] h-[300px] text-center flex items-center justify-center' key={crypto.randomUUID()}>
                 {item.collection}
             </div>
           ))
