@@ -6,7 +6,7 @@ import HeadernNav from "./headernav";
 const MainHeader = async () => {
   const user = await getSession();
 
-  console.log("current sessoin", user)
+  console.log("de current sessoin", JSON.stringify(user))
 
   return (
     <nav className="flex items-center gap-2 bg-[#222] p-4 rounded-lg flex-col md:flex-row">
@@ -45,7 +45,7 @@ const MainHeader = async () => {
         🎛️
       </Link>
 
-      <HeadernNav user={user} />
+      <HeadernNav user={JSON.stringify(user)} />
     </nav>
   );
 };

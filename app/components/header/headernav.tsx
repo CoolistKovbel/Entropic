@@ -51,10 +51,12 @@ const HeadernNav = ({ user }: HeaderNav) => {
   }, [handleDrop]);
 
   return (
-    <nav className="p-2">
-      {user.isLoggedIn ? (
+    <nav className="p-10">
+      {user?.isLoggedIn ? (
         <div className="flex items-center bg-[#111] p-2 rounded-lg relative w-[100px]" ref={dropdownRef}>
+
           <p className="w-full">{user.username?.substring(0, 5)}</p>
+
           <button onClick={handleDropDown}>↓</button>
           {handleDrop && (
             <div className="absolute top-0 right-0 bg-[#222] w-[200px] h-[300px] p-4">

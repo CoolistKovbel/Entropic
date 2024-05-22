@@ -11,6 +11,7 @@ const LoginForm = () => {
   // Handle user login
   const handleUserLogin = async (e: any) => {
     try {
+    
       e.preventDefault();
 
       // Ensure window.ethereum is available
@@ -45,15 +46,20 @@ const LoginForm = () => {
     } catch (error) {
       console.log(error);
     }
+
   };
 
   return (
+
     <form
       className="w-full flex-col flex items-center gap-4"
       onSubmit={handleUserLogin}
     >
+
       <p className="text-sm underline capitalize">Have MetaMask downloaded</p>
+
       <button className="bg-[#000] p-2 rounded-lg">Sign In</button>
+
     </form>
   );
 };

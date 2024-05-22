@@ -4,7 +4,7 @@ import React from "react";
 const page = () => {
   const latest_collactions = [
     {
-      collection_Name: "stupid",
+      collection_Name: "Pinote",
       collection_image: "/ephonite.png",
     },
     {

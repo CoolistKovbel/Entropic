@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} p-10 flex flex-col w-full gap-10`} >
         <MainHeader />
         {children}
       </body>

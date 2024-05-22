@@ -7,3 +7,14 @@ You will need to be able to create a nft collection that fit stantds youw ill be
 app token reward:
 0x8F4eb6a6Bcfd5Af48aa9068a907c327e0e092BA4
 
+
+For those who would like to intergrate your own nft collection be sure to make sure your nft contract has a mint function.
+
+
+-
+Pinote
+Photune
+BeaconPulse
+~dApp~
+
+-
