@@ -9,7 +9,8 @@ interface HeaderNav {
 }
 
 const HeadernNav = ({ user }: HeaderNav) => {
-  
+  const newUser = JSON.parse(user)
+
   const [handleMint, setHandleMint] = useState(user.length > 0);
   const [handleDrop, setHandleDrop] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -52,10 +53,10 @@ const HeadernNav = ({ user }: HeaderNav) => {
 
   return (
     <nav className="p-10">
-      {user?.isLoggedIn ? (
+      {newUser?.isLoggedIn ? (
         <div className="flex items-center bg-[#111] p-2 rounded-lg relative w-[100px]" ref={dropdownRef}>
 
-          <p className="w-full">{user.username?.substring(0, 5)}</p>
+          <p className="w-full">{newUser.username?.substring(0, 5)}</p>
 
           <button onClick={handleDropDown}>↓</button>
           {handleDrop && (

@@ -47,10 +47,17 @@ const page = async () => {
 
   ];
 
+  // Grab latest collection
+  const grabLatestCollections = async () => {
+    try {
+      console.log("ouwwwwwwwwwe")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <section className="w-full min-h-screen p-4 ">
-
-      <HandleNFTListing userIsLogged={userIsLogged} />
 
       <header className="w-full bg-[#222] mb-10 rounded-lg">
         <h2 className="text-2xl p-3 font-bold bg-[#333]">Latest mint</h2>
@@ -60,25 +67,36 @@ const page = async () => {
 
           <div className="w-[50%]">
 
-            <h2 className="text-3xl p-1 mb-2 text-center">
+            <h2 className="text-4xl mb-2 text-center">
               Ephonite Collection
             </h2>
 
-            <div className="w-[300px] h-[300px] relative">
+            <div className="w-[300px] h-[300px] relative mx-auto">
               <Image src="/ephonite.png" alt="art concept nft" fill />
             </div>
             
           </div>
 
           <div className="flex flex-col gap-4 p-4 bg-[#222] drop-shadow-lg rounded-lg">
-            <h3 className="text-2xl">Total Mint: 222</h3>
-            <p>Contract Address: 0x31e</p>
-            <p className="text-sm">
+
+            <p className="text-2xl font-bold">Contract Address: 0x31e</p>
+
+
+            <p className="text-[18px]">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse,
               velit optio dolorum deserunt qui numquam molestias! Debitis eaque
               iste ipsam vero, rem animi! Iusto debitis reprehenderit a, libero
               excepturi impedit!
             </p>
+
+            
+
+            <div className="w-full flex items-start gap-4 flex-col text-[9px]">
+              <p className="text-2xl">Total Holders: 111</p>
+              <p className="text-2xl">Total  View: 444</p>
+              <p className="text-2xl">Total  Interest: 444</p>
+
+            </div>
 
             <a
               href="/mint/4"
@@ -91,14 +109,19 @@ const page = async () => {
         </div>
       </header>
 
+      <HandleNFTListing userIsLogged={userIsLogged} />
+
       <div className="w-full flex items-center flex-col w-full h-[800px] overflow-auto gap-4">
         {slowlife.map((item) => (
           <div key={crypto.randomUUID()} className="p-4 bg-[#222] w-full rounded-lg flex items-center justify-between">
+
             <header className="w-[70%] flex items-center flex-col">
+
               <div>
                 <h1 className="text-3xl font-bold mb-2">{item.collectionName}</h1>
                 <p className="text-md">{item.collectionDescription}</p>
               </div>
+
               <div className="text-center mt-10">
 
                 <div className="flex items-center justify-between gap-3 rounded-lg w-80% mb-4">
@@ -108,10 +131,13 @@ const page = async () => {
                 </div>
                   <Link href="/" className="w-full bg-[#000] p-3 hover:bg-[#555] rounded-lg">Read More</Link>
               </div>
+
             </header>
+
             <div className="w-[300px] h-[300px] relative">
               <Image src={item.collectionImage} alt="slow life" fill />
             </div>
+
           </div>
         ))}
       </div>
