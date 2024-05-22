@@ -25,7 +25,7 @@ const hadleImageUpload = async (image: any) => {
   const fileBuffer = await (image as File).arrayBuffer();
   const buffer = Buffer.from(fileBuffer);
 
-  const path = `${process.cwd()}/public/blogheaders/${
+  const path = `${process.cwd()}/public/nftImages/${
     crypto.randomUUID() + image.name
   }`;
 
@@ -118,7 +118,7 @@ export const logout = async () => {
   redirect("/");
 };
 
-// Handle user listing nft
+// Handle user listing nft from server
 export async function handleNFTListing(formData: FormData) {
   const { name, description, address, cost } = Object.fromEntries(formData);
 
@@ -127,18 +127,7 @@ export async function handleNFTListing(formData: FormData) {
 
     const imagePa = formData.get("imageBanner") as File;
 
-    const fileBuffer = await imagePa.arrayBuffer();
-    const buffer = Buffer.from(fileBuffer);
-
-    const path = `${process.cwd()}/public/nftImages/${
-      crypto.randomUUID() + imagePa.name
-    }`;
-
-    await writeFile(path, buffer);
-
-    const rest = path.split(`${process.cwd()}/public`)[1];
-
-    console.log(path, rest);
+    const rest = await hadleImageUpload(imagePa)
 
     const payload = [
       {
@@ -174,7 +163,7 @@ export async function handleNFTListing(formData: FormData) {
   }
 }
 
-// Hanle user liking listing
+// Grab single latest collection
 export const grabLatestCollections = async () => {
   try {
     await dbConnect();
@@ -187,6 +176,7 @@ export const grabLatestCollections = async () => {
   }
 };
 
+// Handle grabbing lasted listed collection
 export const grabRecentCollection = async () => {
   try {
     await dbConnect();
@@ -198,3 +188,6 @@ export const grabRecentCollection = async () => {
     console.log("error");
   }
 };
+
+
+// Handle 
