@@ -20,6 +20,7 @@ const Page = async () => {
 
   return (
     <main className="p-10 bg-[#444]">
+      {/* look */}
       {userr.isLoggedIn && <HandleProfile />}
       <header className="bg-[#222] p-4 flex items-center justify-between w-full mb-4">
 

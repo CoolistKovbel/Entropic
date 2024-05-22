@@ -20,7 +20,7 @@ const HandleProfile = () => {
         className="bg-[#222] p-3 rounded-lg hover:bg-[#222] hover:bg-[#111]"
         onClick={handleNFTList}
       >
-        create nft
+        create nft listing
       </button>
 
       <a

@@ -9,6 +9,7 @@ import { cookies } from "next/headers";
 import dbConnect from "./db";
 import { redirect } from "next/navigation";
 import { writeFile } from "fs/promises";
+import { NFTListing } from "../models/Collection";
 
 export const getSession = async () => {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
@@ -119,33 +120,81 @@ export const logout = async () => {
 
 // Handle user listing nft
 export async function handleNFTListing(formData: FormData) {
-
-  const { name, description, address, cost, imageBanner } =
-    Object.fromEntries(formData);
+  const { name, description, address, cost } = Object.fromEntries(formData);
 
   try {
+    await dbConnect();
 
-    console.log("grabbing nft data from user");
+    const imagePa = formData.get("imageBanner") as File;
+
+    const fileBuffer = await imagePa.arrayBuffer();
+    const buffer = Buffer.from(fileBuffer);
+
+    const path = `${process.cwd()}/public/nftImages/${
+      crypto.randomUUID() + imagePa.name
+    }`;
+
+    await writeFile(path, buffer);
+
+    const rest = path.split(`${process.cwd()}/public`)[1];
+
+    console.log(path, rest);
 
     const payload = [
       {
-        name,
-        description,
-        address,
-        cost,
-        imageBanner,
+        collectionName: name as string,
+        collectionDescription: description as string,
+        collectionContractAddress: address as string,
+        cost: Number(cost),
+        image: rest as string,
       },
     ];
 
+    console.log("grabbing nft data from user", payload);
+
+    // Listing NFT
+    const collection = new NFTListing({
+      collectionName: name as string,
+      collectionDescription: description as string,
+      collectionContractAddress: address as string,
+      cost: Number(cost),
+      image: rest as string,
+    });
+
+    const boool = await collection.save();
+
+    console.log(boool);
 
     // Client input data
-    console.log(payload);
+    // console.log(payload);
 
     return "ok";
-
   } catch (error) {
     console.log(error);
   }
 }
 
 // Hanle user liking listing
+export const grabLatestCollections = async () => {
+  try {
+    await dbConnect();
+
+    const gg = await NFTListing.find();
+
+    return gg;
+  } catch (error) {
+    console.log("error");
+  }
+};
+
+export const grabRecentCollection = async () => {
+  try {
+    await dbConnect();
+
+    const gg = await NFTListing.find().sort({ createdAt: -1 });
+    console.log("all the collections", gg);
+    return gg;
+  } catch (error) {
+    console.log("error");
+  }
+};
