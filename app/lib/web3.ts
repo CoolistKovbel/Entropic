@@ -70,6 +70,28 @@ export const mintNFT = async (_amount: any) => {
   }
 };
 
+export const grabContractData = async () => {
+  try {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // Get the signer
+    const signer = provider.getSigner();
+    const user = signer.getAddress();
+
+    // Contract main
+    const contractInstance = new ethers.Contract(
+      ContractNFTCollection,
+      erc721TokenAbi,
+      signer
+    );
+
+    const gg = await contractInstance.ownerToToken(user);
+
+    return gg;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // export const swapToken = async (_amount: any) => {
 //   try {
 //     console.log("swapping token");

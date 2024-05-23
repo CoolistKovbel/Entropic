@@ -59,7 +59,7 @@ export async function ContactEmail(
 }
 
 export async function handleLogin(formData: any) {
-  const { userAddress, currentUserAccount, signature } = formData;
+  const { currentUserAccount, signature } = formData;
 
   try {
     // Connect to the database
@@ -75,6 +75,7 @@ export async function handleLogin(formData: any) {
       session.userId = userExist._id.toString();
       session.username = userExist.username;
       session.email = userExist.email as string;
+      session.currentUserBlockAccount = userExist.useraccount
       session.isLoggedIn = true;
 
       await session.save();

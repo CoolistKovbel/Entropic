@@ -1,11 +1,6 @@
 import MintPage from "@/app/components/collectionList/mintPage";
-import Image from "next/image";
-import React from "react";
 
 const Page = () => {
-
-
-
 
   const collection = {
     collectionName: "Name",
@@ -14,11 +9,6 @@ const Page = () => {
     collectionImage: "/page.url",
     collectionDescription: "descroption"
   }
-
-
-
-
-
 
   return (
     <main className="p-4">
