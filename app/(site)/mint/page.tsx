@@ -49,8 +49,6 @@ const page = async () => {
 
   // Grab latest collection
   
-
-
   const gg = await grabRecentCollection();
 
   console.log(gg, "Heay")
@@ -137,7 +135,7 @@ const page = async () => {
             </header>
 
             <div className="w-[300px] h-[300px] relative">
-              <Image src={gg[0].image} alt="slow life" fill />
+              <Image src={gg![0].image as string} alt="slow life" fill />
             </div>
             
           </div>
@@ -172,7 +170,7 @@ const page = async () => {
             </header>
 
             <div className="w-[300px] h-[300px] relative">
-              <Image src={gg[0].image} alt="slow life" fill />
+              <Image src={gg![0].image as string} alt="slow life" fill />
             </div>
             
           </div>
@@ -180,6 +178,7 @@ const page = async () => {
 
         
       </div>
+
     </section>
   );
 };
