@@ -51,8 +51,6 @@ const page = async () => {
 
   const gg = await grabRecentCollection();
 
-  console.log(gg, "Heay");
-
   return (
     <section className="w-full min-h-screen p-4 ">
       <header className="w-full bg-[#222] mb-10 rounded-lg">
@@ -85,7 +83,7 @@ const page = async () => {
               </div>
 
               <a
-                href="/mint/4"
+                href={`/mint/${gg[0]._id}`}
                 className="bg-[#111] font-bold rounded-lg p-2 hover:bg-[#444]"
               >
                 Learn More
@@ -93,23 +91,18 @@ const page = async () => {
             </div>
           </div>
         )}
-
       </header>
 
       <HandleNFTListing userIsLogged={userIsLogged} />
 
       <div className="w-full flex items-center flex-col w-full h-[800px] overflow-auto gap-4">
-
-
         {gg!.map((item) => (
           <div
             key={crypto.randomUUID()}
             className="p-4 bg-[#222] w-full rounded-lg flex items-center justify-between"
           >
-
             <header className="w-[70%] flex items-center flex-col">
-
-            <p className="text-2xl font-bold">{item.collectionName}</p>
+              <p className="text-2xl font-bold">{item.collectionName}</p>
 
               <div className="text-center mt-10">
                 <div className="flex items-center justify-between gap-3 rounded-lg w-80% mb-4">
@@ -124,25 +117,19 @@ const page = async () => {
                   </p>
                 </div>
                 <Link
-                  href="/"
+                  href={`/mint/${item._id}`}
                   className="w-full bg-[#000] p-3 hover:bg-[#555] rounded-lg"
                 >
                   Read More
                 </Link>
               </div>
-
-                 
-
             </header>
 
             <div className="w-[300px] h-[300px] relative">
-            <Image src={item.image as string} alt="slow life" fill />
-          </div>
-
+              <Image src={item.image as string} alt="slow life" fill />
+            </div>
           </div>
         ))}
-
-
       </div>
     </section>
   );
