@@ -1,22 +1,22 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { grabLatestCollections } from "@/app/lib/action";
 
 const LatestCollection = () => {
-
-  const handleMintCurrentCollection = async (e:any) => {
-    e.preventDefault()
+  const [latestCollections, setLatestCollections] = useState<any>([]);
+  const handleMintCurrentCollection = async (e: any) => {
+    e.preventDefault();
 
     try {
-      console.log(e.target.mint_amount.value)
+      console.log(e.target.mint_amount.value);
 
       console.log("handleing the current collection mint");
     } catch (error) {
       console.log(error);
     }
   };
-
 
   // Grab useEffect
 
@@ -28,7 +28,7 @@ const LatestCollection = () => {
       collectionImageIpfs: "/QmT2HZLQYc6G2tZmBjiC4YMLs44LoQK53DtAChGSWCUmW9",
       collectionImage: "/ephonite.png",
       collectionDescription:
-        "This is a collection of 222 erc-721 tokens that a user can user to post on their wall or even use in future platform game. "
+        "This is a collection of 222 erc-721 tokens that a user can user to post on their wall or even use in future platform game. ",
     },
     {
       collectionName: "EntropicScene Collection", // mint page
@@ -46,7 +46,7 @@ const LatestCollection = () => {
       collectionRewardToken: "0",
       collectionImage: "/",
       collectionDescription:
-        "EpeticlePet is an online service and vendor for your pets where you can get yourself pet supplies using the reward token this token allows you to generate."
+        "EpeticlePet is an online service and vendor for your pets where you can get yourself pet supplies using the reward token this token allows you to generate.",
     },
     {
       collectionName: "Pinote",
@@ -54,8 +54,7 @@ const LatestCollection = () => {
       tokenAddress: "0",
       collectionRewardToken: "0",
       collectionImage: "/",
-      collectionDescription:
-        "d"
+      collectionDescription: "d",
     },
     {
       collectionName: "MysticMurko",
@@ -63,8 +62,7 @@ const LatestCollection = () => {
       tokenAddress: "0",
       collectionRewardToken: "0",
       collectionImage: "/",
-      collectionDescription:
-        "d"
+      collectionDescription: "d",
     },
     {
       collectionName: "PhotuneLightway",
@@ -72,8 +70,7 @@ const LatestCollection = () => {
       tokenAddress: "0",
       collectionRewardToken: "0",
       collectionImage: "/",
-      collectionDescription:
-        "d"
+      collectionDescription: "d",
     },
     {
       collectionName: "PrimeBlossomVault",
@@ -82,31 +79,34 @@ const LatestCollection = () => {
       tokenAddress: "0",
       collectionRewardToken: "0",
       collectionImage: "/",
-      collectionDescription:
-        "d"
+      collectionDescription: "d",
     },
   ];
 
   useEffect(() => {
+    const gg = async () => {
+      try {
+        const sadLife = await grabLatestCollections();
 
+        setLatestCollections(sadLife);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-
-
-
-
-  } ,[])
-
-                                               
+    gg();
+  }, []);
 
   return (
     <div className="w-full bg-[#222] p-4 h-fit mt-4  flex flex-col gap-10">
-      {latestCollection.map((item, index) => (
+      {latestCollections.map((item, index) => (
         <div key={crypto.randomUUID()} className="bg-[#555] w-full">
-
           <div className="p-5">
             {/* Lattest collection */}
-            <h2 className="text-4xl text-center font-bold mb-4">{item.collectionName}</h2>
-            
+            <h2 className="text-4xl text-center font-bold mb-4">
+              {item.collectionName}
+            </h2>
+
             <div className="flex items-center gap-10 mb-4 md:flex-row flex-col ">
               {/* Carrpsal */}
               <div className="w-[250px] h-[250px] md:w-[300px] md:h-[300px] relative">
@@ -114,22 +114,25 @@ const LatestCollection = () => {
               </div>
 
               {/*  This is a collection where you can see many different symbols and meanings that you can see capture a moment within the image tell you a story.  */}
-              <p className="w-full md:w-[50%] text-xl mb-4">{item.collectionDescription}</p>
-              
+              <p className="w-full md:w-[50%] text-xl mb-4">
+                {item.collectionDescription}
+              </p>
             </div>
 
-            <a className="text-2xl font-bold bg-[#111] p-3 rounded-lg" href={`/mint/${index}`} >
+            <a
+              className="text-2xl font-bold bg-[#111] p-3 rounded-lg"
+              href={`/mint/${index}`}
+            >
               Read More
             </a>
-            
           </div>
 
           <form className="p-3" onSubmit={handleMintCurrentCollection}>
 
             <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg">
-              Token address: <span className="text-[.8rem]">{item.tokenAddress}</span>
+              Token address:{" "}
+              <span className="text-[.8rem]">{item.tokenAddress}</span>
             </h2>
-
 
             <div className="w-full items-center flex justify-center gap-4">
               <input
@@ -137,12 +140,12 @@ const LatestCollection = () => {
                 placeholder="enter amount"
                 id="mint_amount"
                 name="mint_amount"
-                className="p-2 text-black rounded-lg" 
+                className="p-2 text-black rounded-lg"
               />
 
               <button className="p-2 bg-[#111] rounded-lg">enter</button>
             </div>
-
+            
           </form>
 
         </div>
