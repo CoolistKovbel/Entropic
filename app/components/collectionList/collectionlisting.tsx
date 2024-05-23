@@ -19,7 +19,7 @@ const CollectionListing = async () => {
 
   return (
     <div className="bg-[#222] p-10">
-      {starter.map((item: any) => {
+      {starter!.map((item: any) => {
         return (
           <div key={crypto.randomUUID()}>
             <div>
