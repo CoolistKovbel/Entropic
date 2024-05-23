@@ -62,7 +62,7 @@ const page = async () => {
         <h2 className="text-2xl p-3 font-bold bg-[#333]">Latest mint</h2>
 
         {/* Collection */}
-        {gg.length > 0 && (
+        {gg && (
           <div className="flex items-center gap-4 p-4 bg-[#444] flex-col justify-center">
 
             <div className="w-full">
