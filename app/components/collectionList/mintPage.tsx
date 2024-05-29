@@ -1,39 +1,37 @@
 "use client";
 
+import { NFTListing } from "@/app/models/Collection";
 import { ethers } from "ethers";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 const MintPage = () => {
+
   const pathname = usePathname();
+
   const collection = {
     collectionImage: "",
     collectionName: "",
     collectionDescription: "",
   };
+
   const contractAddress = pathname.split("/")[2];
+
+  console.log(contractAddress,"literralty")
   
 
   const handleContractData = async (ed: any) => {
     try {
       console.log("stupid dum fucking moron");
 
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const gg = await NFTListing.find({
+        collectionContractAddress:contractAddress
+      })
 
-      // Get the signer
-      const signer = provider.getSigner();
+      console.log(gg, "slow life")
+    
 
-      //
-
-      // Contract main
-      const contractInstance = new ethers.Contract(
-        ContractNFTCollection,
-        erc721TokenAbi,
-        signer
-      );
-
-      return contractInstance;
     } catch (error) {
       console.log(error);
     }

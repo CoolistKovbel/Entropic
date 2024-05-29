@@ -40,8 +40,10 @@ const LatestCollection = () => {
     <div className="w-full bg-[#222] p-4 h-fit mt-4  flex flex-col gap-10">
 
       <header className="w-full p-4 bg-[#111] rounded-lg">
-        <h2 className="text-5xl font-bold">Recent Collections</h2>
-        <p className="text-lg">
+
+        <h2 className="text-4xl font-bold">Recent Collections</h2>
+
+        <p className="text-[14px]">
           List yours up be sure to provide a valid link to site.
         </p>
       </header>
@@ -80,11 +82,11 @@ const LatestCollection = () => {
 
           </div>
 
-          <form className="p-3" onSubmit={handleMintCurrentCollection}>
+          <form className="p-3 flex items-center justify-between" onSubmit={handleMintCurrentCollection}>
 
-            <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg         ">
+            <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg  flex flex-col     ">
               Token address:
-              <span className="text-[2rem] ml-2">{item.collectionContractAddress}</span>
+              <span className="text-[1rem] ml-2">{item.collectionContractAddress}</span>
             </h2>
 
             <div className="w-full items-center flex justify-center gap-4">
@@ -93,10 +95,10 @@ const LatestCollection = () => {
                 placeholder="enter amount"
                 id="mint_amount"
                 name="mint_amount"
-                className="p-2 text-black rounded-lg"
+                className="p-2 w-[30%] text-black rounded-lg"
               />
 
-              <button className="p-2 bg-[#111] rounded-lg">enter</button>
+              <button className="p-2 bg-[#333] rounded-lg">enter</button>
             </div>
             
           </form>

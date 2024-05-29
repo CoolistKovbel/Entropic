@@ -73,6 +73,16 @@ const CreateNFTListingtsxModel = () => {
             />
           </label>
           <label className="block mb-2">
+            Contract ABI:
+            <input
+              type="text"
+              name="contractABI"
+              id="contractABI"
+              required
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+            />
+          </label>
+          <label className="block mb-2">
             Description:
             <input
               type="text"

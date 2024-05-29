@@ -1,6 +1,10 @@
 import MintPage from "@/app/components/collectionList/mintPage";
 
-const Page = () => {
+const Page = async () => {
+
+  
+
+
 
   const collection = {
     collectionName: "Name",

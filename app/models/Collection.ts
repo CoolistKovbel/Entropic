@@ -11,6 +11,7 @@ interface INFTListing {
   interests: number;
   holders: number;
   cost: number;
+  contractABI: string;
 }
 
 // TODO: Make it better......
@@ -25,6 +26,9 @@ const NFTListingSchema = new mongoose.Schema<INFTListing>(
     },
     collectionContractAddress: {
       type: String,
+    },
+    contractABI: {
+      type: String
     },
     banner: {
       type: String,

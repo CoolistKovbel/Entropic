@@ -10,13 +10,12 @@ export default function Home() {
         <div className="flex items-center gap-5 flex-col md:flex-row">
 
           <header className="bg-[#222] text-center p-10 rounded-lg w-full md:w-[60%]">
-            <h1 className="text-[3                                                                                                           rem] font-bold mb-2">Ephotopicup</h1>
+            <h1 className="text-[3rem] font-bold mb-2">Ephotopicup</h1>
 
             <p className="text-[1.0rem]">
-              Welcome to a small place where you are able to mint some cool nft
-              collections from the user by the user. You will also be able to
-              earn rewards and trade your nfts. Get started today!
+             Welcome to a site where you are able to list any type of nft collection to be able to be able to attract more art ethusiate.
             </p>
+            
           </header>
 
           <div className="w-[300px] h-[300px] relative">

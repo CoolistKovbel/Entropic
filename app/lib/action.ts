@@ -121,7 +121,7 @@ export const logout = async () => {
 
 // Handle user listing nft from server
 export async function handleNFTListing(formData: FormData) {
-  const { name, description, address, cost } = Object.fromEntries(formData);
+  const { name, description, address, cost, contractABI } = Object.fromEntries(formData);
 
   try {
     await dbConnect();
@@ -137,6 +137,7 @@ export async function handleNFTListing(formData: FormData) {
         collectionContractAddress: address as string,
         cost: Number(cost),
         image: rest as string,
+        contractABI: contractABI as string
       },
     ];
 
@@ -149,6 +150,7 @@ export async function handleNFTListing(formData: FormData) {
       collectionContractAddress: address as string,
       cost: Number(cost),
       image: rest as string,
+      contractABI: contractABI as string
     });
 
     const boool = await collection.save();
