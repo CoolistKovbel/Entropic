@@ -11,7 +11,7 @@ export default function Home() {
         <div className="flex items-center gap-5 flex-col md:flex-row">
 
           <header className="bg-[#222] text-center p-4 rounded-lg w-full md:w-[60%]">
-            <h1 className="text-[4rem] font-bold mb-2">Entropic</h1>
+            <h1 className="text-[4rem] font-bold mb-2">Ephotopicup</h1>
 
             <p className="text-[1.0rem]">
               Welcome to a small place where you are able to mint some cool nft
@@ -21,7 +21,7 @@ export default function Home() {
           </header>
 
           <div className="w-[300px] h-[300px] relative">
-            <Image src="/entropic-item.png" alt="stupid" fill />
+            <Image src="/logo.png" alt="stupid" fill />
           </div>
 
         </div>

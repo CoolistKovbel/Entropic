@@ -5,7 +5,7 @@ import React from "react";
 const Page = () => {
   return (
     <section className="p-10">
-      <h2 className="text-4xl font-bold">About Entropic Scene</h2>
+      <h2 className="text-4xl font-bold">About Ephotopicup</h2>
     
         <div className="p-10 text-[1.3rem]">
         <p>
@@ -31,7 +31,7 @@ const Page = () => {
 
             
             <div className="w-[400px] h-[400px] relative">
-                <Image src="/entropic-item.png" alt="erc token" fill />
+                <Image src="/logo.png" alt="erc token" fill />
             </div>
 
         </div>

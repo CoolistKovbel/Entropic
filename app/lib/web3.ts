@@ -1,13 +1,12 @@
 import { ethers } from "ethers";
-import erc721TokenAbi from "./ercab.json";
+import erc20TokenAbi from "./erc20.json";
+import erc721TokenAbi from "./erc721.json";
 
-// maybe add token
-
-// Token Contract - mainnet
+// Token Contract - erc-20 - mainnet
 export const contractTokenContract =
   "0x3336deBc102ce50a707CF8Df8c626aB338D55539";
 
-// NFT Contract /testnet
+// NFT Contract erc-721-  - mainnet
 export const ContractNFTCollection =
   "0xB31cD539B812be9C4DDC881214e2CD29888de54F";
 
@@ -92,33 +91,6 @@ export const grabContractData = async () => {
   }
 };
 
-// export const swapToken = async (_amount: any) => {
-//   try {
-//     console.log("swapping token");
-
-//     const amountInWei = ethers.utils.parseEther(_amount.toString());
-
-//     const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-//     // Get the signer
-//     const signer = provider.getSigner();
-
-//     // Contract main
-//     const contractInstance = new ethers.Contract(
-//       contractTokenContract,
-//       tokenABI,
-//       signer
-//     );
-
-//     await contractInstance.swapEtherForTokens({
-//       value: amountInWei,
-//       gasLimit: 600000,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const userOwns = async () => {
   try {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -141,5 +113,5 @@ export const userOwns = async () => {
   }
 };
 
-// Fogure out oauto
+
 

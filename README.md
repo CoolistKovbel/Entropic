@@ -1,20 +1,10 @@
-# entropic
+# Ephotopicup
 
-This is going to be where you will be able to drop your latest collections
-You will need to be able to create a nft collection that fit stantds youw ill be able to mint from the latest collection you will be able to trade it in the gallarray  and if you have any questions go to contact page. Just remeber to get metamask to login
+This is an application that allows you to list a nft collection up to our directory allowing others to easily mint and join in on the action. There are a few other things you can do such as stake our token to be able to earn rewards with entropic scene nft.
 
+You are also able  to list your own collections if you would like onto the platform, either you or your collaberator.
 
-app token reward:
-0x8F4eb6a6Bcfd5Af48aa9068a907c327e0e092BA4
-
-
-For those who would like to intergrate your own nft collection be sure to make sure your nft contract has a mint function.
+You will be able to also collect and trade.
 
 
--
-Pinote
-Photune
-BeaconPulse
-~dApp~
 
--

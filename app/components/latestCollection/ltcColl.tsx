@@ -5,6 +5,7 @@ import Image from "next/image";
 import { grabLatestCollections } from "@/app/lib/action";
 
 const LatestCollection = () => {
+
   const [latestCollections, setLatestCollections] = useState<any>([]);
 
   const handleMintCurrentCollection = async (e: any) => {
@@ -35,22 +36,19 @@ const LatestCollection = () => {
     gg();
   }, []);
 
-
-  console.log(latestCollections)
-
   return (
     <div className="w-full bg-[#222] p-4 h-fit mt-4  flex flex-col gap-10">
 
-      <header className="w-full p-3 bg-[#111] rounded-lg">
-        <h2 className="text-3xl font-bold">Recent Collections</h2>
-        <p>
+      <header className="w-full p-4 bg-[#111] rounded-lg">
+        <h2 className="text-5xl font-bold">Recent Collections</h2>
+        <p className="text-lg">
           List yours up be sure to provide a valid link to site.
         </p>
       </header>
 
 
       {latestCollections.map((item:any, index) => (
-        <div key={crypto.randomUUID()} className="bg-[#555] w-full">
+        <div key={crypto.randomUUID()} className="bg-[#111] rounded-lg drop-shadow-lg  border-rounded-lg w-full">
 
           <div className="p-5">
 
@@ -62,7 +60,7 @@ const LatestCollection = () => {
             <div className="flex items-center gap-10 mb-4 md:flex-row flex-col ">
 
               {/* Carrpsal */}
-              <div className="w-[250px] h-[250px] md:w-[300px] md:h-[300px] relative">
+              <div className="w-[250px] h-[250px] md:w-[300px] md:h-[300px] relative mb-4 ">
                 <Image src={item.image} alt="slow" fill />
               </div>
 
@@ -74,7 +72,7 @@ const LatestCollection = () => {
             </div>
 
             <a
-              className="text-2xl font-bold bg-[#111] p-3  rounded-lg  "
+              className="text-2xl font-bold bg-[#444] p-4  rounded-lg  "
               href={`/mint/${item.collectionContractAddress}`}
             >
               Read More
@@ -84,7 +82,7 @@ const LatestCollection = () => {
 
           <form className="p-3" onSubmit={handleMintCurrentCollection}>
 
-            <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg">
+            <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg         ">
               Token address:
               <span className="text-[2rem] ml-2">{item.collectionContractAddress}</span>
             </h2>
@@ -105,6 +103,7 @@ const LatestCollection = () => {
 
         </div>
       ))}
+
     </div>
   );
 };
