@@ -8,7 +8,7 @@ interface INFTListing {
   image: string;
   siteUrl: string;
   views: number;
-  interests: number;
+  interests: string[];
   holders: number;
   cost: number;
   contractABI: string;
@@ -28,7 +28,7 @@ const NFTListingSchema = new mongoose.Schema<INFTListing>(
       type: String,
     },
     contractABI: {
-      type: String
+      type: String,
     },
     banner: {
       type: String,
@@ -46,7 +46,7 @@ const NFTListingSchema = new mongoose.Schema<INFTListing>(
       type: Number,
     },
     interests: {
-      type: Number,
+      type: [String], // Update to an array of strings
     },
     holders: {
       type: Number,

@@ -31,7 +31,7 @@ const hadleImageUpload = async (image: any) => {
 
   await writeFile(path, buffer);
 
-  return path.split(`${process.cwd()}/public/`)[1];
+  return path.split(`${process.cwd()}/public`)[1];
 };
 
 export async function ContactEmail(
@@ -75,7 +75,7 @@ export async function handleLogin(formData: any) {
       session.userId = userExist._id.toString();
       session.username = userExist.username;
       session.email = userExist.email as string;
-      session.currentUserBlockAccount = userExist.useraccount
+      session.currentUserBlockAccount = userExist.useraccount;
       session.isLoggedIn = true;
 
       await session.save();
@@ -121,14 +121,15 @@ export const logout = async () => {
 
 // Handle user listing nft from server
 export async function handleNFTListing(formData: FormData) {
-  const { name, description, address, cost, contractABI } = Object.fromEntries(formData);
+  const { name, description, address, cost, contractABI } =
+    Object.fromEntries(formData);
 
   try {
     await dbConnect();
 
     const imagePa = formData.get("imageBanner") as File;
 
-    const rest = await hadleImageUpload(imagePa)
+    const rest = await hadleImageUpload(imagePa);
 
     const payload = [
       {
@@ -137,7 +138,7 @@ export async function handleNFTListing(formData: FormData) {
         collectionContractAddress: address as string,
         cost: Number(cost),
         image: rest as string,
-        contractABI: contractABI as string
+        contractABI: contractABI as string,
       },
     ];
 
@@ -150,7 +151,7 @@ export async function handleNFTListing(formData: FormData) {
       collectionContractAddress: address as string,
       cost: Number(cost),
       image: rest as string,
-      contractABI: contractABI as string
+      contractABI: contractABI as string,
     });
 
     const boool = await collection.save();
@@ -192,5 +193,42 @@ export const grabRecentCollection = async () => {
   }
 };
 
+// Handle grabing ths specfic contrac t addreass
+export const getSpecfocContractDatra = async (contractAddress: any) => {
+  try {
+    console.log("STUPID");
 
-// Handle 
+    await dbConnect();
+
+    const updatedDocument = await NFTListing.findOneAndUpdate(
+      { _id: contractAddress },
+      { $inc: { views: 1 } },
+      { new: true } // Return the updated document
+    ).lean();
+
+    return updatedDocument;
+  } catch (error) {
+    console.log(error);
+    return "error grabbing contract";
+  }
+};
+
+// Handle
+export const handleInterestToggle = async (
+  contractAddress: any,
+  userId: any
+) => {
+  try {
+    console.log("Slow life");
+
+    const updatedDocument = await NFTListing.findOneAndUpdate(
+      { _id: contractAddress },
+      { $addToSet: { interests: userId } }, // Use $addToSet to avoid duplicates
+      { new: true }
+    );
+
+    return updatedDocument;
+  } catch (error) {
+    console.log("error");
+  }
+};

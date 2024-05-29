@@ -1,37 +1,44 @@
 "use client";
 
-import { NFTListing } from "@/app/models/Collection";
-import { ethers } from "ethers";
+import {
+  getSpecfocContractDatra,
+  handleInterestToggle,
+} from "@/app/lib/action";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const MintPage = () => {
+interface MintPageProps {
+  userSession: any;
+}
 
+const MintPage = ({ userSession }: MintPageProps) => {
+  const [ContractData, setContractData] = useState<any>([]);
   const pathname = usePathname();
-
-  const collection = {
-    collectionImage: "",
-    collectionName: "",
-    collectionDescription: "",
-  };
-
   const contractAddress = pathname.split("/")[2];
 
-  console.log(contractAddress,"literralty")
-  
+  console.log(ContractData);
 
   const handleContractData = async (ed: any) => {
     try {
       console.log("stupid dum fucking moron");
 
-      const gg = await NFTListing.find({
-        collectionContractAddress:contractAddress
-      })
+      const gg = await getSpecfocContractDatra(ed);
 
-      console.log(gg, "slow life")
-    
+      console.log(gg, "slow life");
+      setContractData(gg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const handleInterest = async () => {
+    try {
+      console.log("stupid");
+
+      const gg = await handleInterestToggle(contractAddress, userSession);
+
+      console.log(gg);
     } catch (error) {
       console.log(error);
     }
@@ -48,17 +55,47 @@ const MintPage = () => {
   }, []);
 
   return (
-    <section className="bg-[#222] ">
-      <div className="w-[300px] h-[300px] relative">
-        <Image
-          src={collection.collectionImage}
-          alt="nft collection image"
-          fill
-        />
+    <section className="bg-[#222] p-10 flex items-center">
+      <div className="w-[50%]">
+        <div className="w-[300px] h-[300px] relative">
+          <Image src={ContractData.image} alt="nft collection image" fill />
+        </div>
+
+        <h2 className="text-2xl font-bold">{ContractData.collectionName}</h2>
+        <p className="text-sm">{ContractData.collectionDescription}</p>
       </div>
 
-      <h2 className="text-2xl">{collection.collectionName}</h2>
-      <p className="text-sm">{collection.collectionDescription}</p>
+      <div className="w-[50%] flex flex-col">
+        <div>
+          <h2 className="text-2xl mb-2">
+            Address: {ContractData.collectionContractAddress}
+          </h2>
+          <h3>Views: {ContractData.views}</h3>
+
+          <form>
+            <label
+              htmlFor="mintAmount"
+              className="flex items-center justify-between"
+            >
+              <span className="text-xl">Mint</span>
+              <input type="amount" className="p-2 bg-[#000] text-xl" />
+            </label>
+            <button className="bg-[#111] p-2 rounded-lg">mint</button>
+          </form>
+        </div>
+
+        <div className="flex items-center justify-between mt-4">
+          <div className="flex items-center justify-between">
+            <span>interest: {ContractData.interests}</span>
+            <button
+              onClick={handleInterest}
+              className="bg-[#111] p-3 rounded-lg hover:bg-[#434]"
+            >
+              🌠
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
