@@ -49,12 +49,13 @@ const LoginForm = () => {
 
   return (
     <form
-      className="w-full flex-col flex items-center gap-4"
+      className="w-full flex-col flex items-center gap-8 "
       onSubmit={handleUserLogin}
     >
-      <p className="text-sm underline capitalize">Have MetaMask downloaded</p>
 
-      <button className="bg-[#000] p-2 rounded-lg">Sign In</button>
+      <button className="bg-[#000] p-4 rounded-lg text-[2rem]">Sign In</button>
+
+      <p className="text-sm underline capitalize">Have MetaMask downloaded</p>
     </form>
   );
 };
