@@ -9,7 +9,7 @@ import FooterMain from "./components/mainfooter";
 export const metadata: Metadata = {
   title: "Ephotopicup",
   description:
-    "Welcome to the place where you will be able to receive tokens from airdrops that will be done by users, the same things with erc-721 tokens, as well as  be able to be part of a community who cares and looks out for one another.",
+    "Welcome to the place where you will be able to receive rewards from trades, able to stake, as well as  be able to be part of a community who cares and looks out for one another.",
 };
 
 export default function RootLayout({
