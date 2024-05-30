@@ -36,7 +36,7 @@ const page = async () => {
 
               <p className="text-[18px]">{gg[0].collectionDescription}</p>
 
-              <div className="w-full flex items-start gap-4 flex-col text-[12px]">
+              <div className="w-full flex items-start gap-4  text-[12px]">
                 <p className="p-2 bg-[#333] rounded-lg">Total Holders: 0</p>
                 <p className="p-2 bg-[#333] rounded-lg">
                   Total View: {gg[0].views}

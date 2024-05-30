@@ -207,11 +207,6 @@ export const getSpecfocContractDatra = async (contractAddress: any) => {
       throw new Error("Document not found");
     }
 
-    // Increment views
-    document.views++;
-
-    // Save the updated document
-    await document.save();
 
     return [document];
 
@@ -222,22 +217,37 @@ export const getSpecfocContractDatra = async (contractAddress: any) => {
 };
 
 // Handle
-export const handleInterestToggle = async (
-  contractAddress: any,
-  userId: any
-) => {
+export const handleInterestToggle = async (contractAddress: any, userId: any) => {
   try {
-    console.log("Slow life");
+    await dbConnect();
 
-    const updatedDocument = await NFTListing.findOneAndUpdate(
-      { _id: contractAddress },
-      { $addToSet: { interests: userId } }, // Use $addToSet to avoid duplicates
-      { new: true }
-    );
+    console.log("Processing interest toggle for - id", contractAddress, userId.userId);
 
-    return updatedDocument;
+    const document = await NFTListing.findOne({
+      _id: contractAddress,
+    });
+
+
+    // Toggle userId in interests array
+    const userIdIndex:any = document?.interests.indexOf(userId.userId);
+    if (userIdIndex === -1) {
+      // Add userId to interests if it's not already included
+      document?.interests.push(userId.userId);
+    } else {
+      // Remove userId from interests if it's already included
+      document?.interests.splice(userIdIndex, 1);
+    }
+
+    // Save the updated document
+    await document?.save();
+
+    revalidatePath(`/mint/${contractAddress}`)
+
+    return JSON.stringify(document);
   } catch (error) {
-    console.log("error");
+    console.error(error);
+    console.log("Error processing interest toggle");
+    throw new Error("Error processing interest toggle");
   }
 };
 
@@ -278,3 +288,28 @@ export const handleUserUpdate = async (
     console.log(error);
   }
 };
+
+export const handleUserViewCounter = async(contractAddress:any) => {
+  try {
+
+    await dbConnect()
+
+
+    const document = await NFTListing.findById(contractAddress);
+
+    if (!document) {
+      throw new Error("Document not found");
+    }
+
+    // Increment views
+    document.views++;
+
+    // Save the updated document
+    await document.save();
+
+  
+    
+  } catch (error) {
+    console.log(error)
+  }
+}

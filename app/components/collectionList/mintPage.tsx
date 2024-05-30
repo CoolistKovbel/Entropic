@@ -3,6 +3,7 @@
 import {
   getSpecfocContractDatra,
   handleInterestToggle,
+  handleUserViewCounter,
 } from "@/app/lib/action";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -13,11 +14,11 @@ interface MintPageProps {
 }
 
 const MintPage = ({ userSession }: MintPageProps) => {
-
   const pathname = usePathname();
+  const [newDoc, setNewDoc] = useState<any>([]);
   const [ContractData, setContractData] = useState<any>([]);
   const contractAddress = pathname.split("/")[2];
-  
+
   const handleContractData = async (ed: any) => {
     try {
       const gg = await getSpecfocContractDatra(ed);
@@ -27,14 +28,10 @@ const MintPage = ({ userSession }: MintPageProps) => {
     }
   };
 
-
   const handleInterest = async () => {
     try {
-      console.log("stupid");
-
       const gg = await handleInterestToggle(contractAddress, userSession);
-
-      console.log(gg, "anything");
+      setNewDoc(gg);
     } catch (error) {
       console.log(error);
     }
@@ -46,32 +43,44 @@ const MintPage = ({ userSession }: MintPageProps) => {
     };
 
     xx();
-  }, [contractAddress]);
+  }, [newDoc]);
+
+  useEffect(() => {
+    const zz = async () => {
+      await handleUserViewCounter(contractAddress)
+
+      return () => {}
+    }
+
+    zz()
+  }, [contractAddress])
 
   return (
     <div>
-      {ContractData ?  (
+      {ContractData ? (
         <section className="bg-[#222] p-10 flex items-center">
-          
           <div className="w-[50%]">
-            <h2 className="text-4xl font-bold mb-4">{ContractData.collectionName}</h2>
-    
+            <h2 className="text-4xl font-bold mb-4">
+              {ContractData.collectionName}
+            </h2>
+
             <div className="w-[300px] h-[300px] relative">
               <Image src={ContractData.image} alt="nft collection image" fill />
             </div>
-    
-            <p className="text-sm text-center mt-4">{ContractData.collectionDescription}</p>
+
+            <p className="text-sm text-center mt-4">
+              {ContractData.collectionDescription}
+            </p>
           </div>
-    
+
           <div className="w-[50%] flex flex-col bg-[#443] p-10 rounded-lg drop-shadow-lg">
             <div>
-
               <h2 className="text-2xl mb-2">
                 Address: {ContractData.collectionContractAddress}
               </h2>
 
               <h3 className="font-bold">Views: {ContractData.views}</h3>
-    
+
               <form>
                 <label
                   htmlFor="mintAmount"
@@ -80,16 +89,16 @@ const MintPage = ({ userSession }: MintPageProps) => {
                   <span className="text-xl">Mint</span>
                   <input type="amount" className="p-2 bg-[#000] text-xl" />
                 </label>
-    
+
                 <button className="bg-[#111] p-2 rounded-lg float-right mt-4">
                   mint
                 </button>
               </form>
             </div>
-    
+
             <div className="flex items-center justify-between mt-4">
-              <div className="flex items-center justify-between">
-                <span>interest: {ContractData.interests}</span>
+              <div className="flex items-center gap-4">
+                <span>interest: {ContractData?.interests?.length}</span>
                 <button
                   onClick={handleInterest}
                   className="bg-[#111] p-3 rounded-lg hover:bg-[#434]"
@@ -100,7 +109,6 @@ const MintPage = ({ userSession }: MintPageProps) => {
             </div>
           </div>
         </section>
-
       ) : (
         <div>
           <h2>sucks</h2>

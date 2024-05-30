@@ -4,7 +4,7 @@ import { inter } from "./components/ui/fonts";
 import "./globals.css";
 import MainHeader from "./components/header/main-header";
 import { ModalProvider } from "./components/providers/model-provider";
-import FooterMain from "./components/footer";
+import FooterMain from "./components/mainfooter";
 
 export const metadata: Metadata = {
   title: "Ephotopicup",
@@ -22,8 +22,8 @@ export default function RootLayout({
       <body className={`${inter.className} p-10 flex flex-col w-full gap-10`} >
         <MainHeader />
         {children}
+        <FooterMain /> 
       </body>
-      <FooterMain />
       <ModalProvider />
     </html>
   );
