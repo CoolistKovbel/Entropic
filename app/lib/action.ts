@@ -207,9 +207,7 @@ export const getSpecfocContractDatra = async (contractAddress: any) => {
       throw new Error("Document not found");
     }
 
-
     return [document];
-
   } catch (error) {
     console.log(error);
     return "error grabbing contract";
@@ -217,19 +215,31 @@ export const getSpecfocContractDatra = async (contractAddress: any) => {
 };
 
 // Handle
-export const handleInterestToggle = async (contractAddress: any, userId: any) => {
+export const handleInterestToggle = async (
+  contractAddress: any,
+  userId: any
+) => {
+  const user = await getSession();
+
   try {
     await dbConnect();
 
-    console.log("Processing interest toggle for - id", contractAddress, userId.userId);
+    if (!user.isLoggedIn) {
+      return "Need to be logged in";
+    }
+
+    console.log(
+      "Processing interest toggle for - id",
+      contractAddress,
+      userId.userId
+    );
 
     const document = await NFTListing.findOne({
       _id: contractAddress,
     });
 
-
     // Toggle userId in interests array
-    const userIdIndex:any = document?.interests.indexOf(userId.userId);
+    const userIdIndex: any = document?.interests.indexOf(userId.userId);
     if (userIdIndex === -1) {
       // Add userId to interests if it's not already included
       document?.interests.push(userId.userId);
@@ -241,7 +251,7 @@ export const handleInterestToggle = async (contractAddress: any, userId: any) =>
     // Save the updated document
     await document?.save();
 
-    revalidatePath(`/mint/${contractAddress}`)
+    revalidatePath(`/mint/${contractAddress}`);
 
     return JSON.stringify(document);
   } catch (error) {
@@ -259,8 +269,9 @@ export const handleUserUpdate = async (
   try {
     await dbConnect();
     const userData = await getSession();
+    let rest: any;
 
-    console.log(updatedFields, userId);
+    console.log(updatedFields.profileImage, userId);
 
     // Find the user by userId
     const user: any = await User.findOne({ _id: userId });
@@ -270,16 +281,40 @@ export const handleUserUpdate = async (
       return;
     }
 
-    // Update the user's fields
-    Object.keys(updatedFields).forEach((key) => {
-      user[key] = updatedFields[key];
-    });
+    if (typeof updatedFields.profileImage !== "undefined") {
+      const fileBuffer = await (
+        updatedFields.profileImage as File
+      ).arrayBuffer();
+      const buffer = Buffer.from(fileBuffer);
+      // set path
+      const path = `${process.cwd()}/public/profileImages/${
+        crypto.randomUUID() + updatedFields.profileImage.name
+      }`;
 
-    userData.username = user.username;
+      // Write image
+      await writeFile(path, buffer);
+      rest = path.split(`${process.cwd()}/public`)[1];
+    }
+
+    for (const [key, value] of Object.entries(updatedFields)) {
+      if (value !== "" && value !== undefined && value !== null) {
+        user[key] = value;
+      }
+    }
+
+    // Update session data
+    if (userData) {
+      if (updatedFields.username) {
+        userData.username = updatedFields.username as string;
+      }
+      if (rest) {
+        userData.image = rest;
+      }
+
+      await userData.save();
+    }
 
     await user.save();
-
-    await userData.save();
 
     revalidatePath("/settings");
 
@@ -289,11 +324,9 @@ export const handleUserUpdate = async (
   }
 };
 
-export const handleUserViewCounter = async(contractAddress:any) => {
+export const handleUserViewCounter = async (contractAddress: any) => {
   try {
-
-    await dbConnect()
-
+    await dbConnect();
 
     const document = await NFTListing.findById(contractAddress);
 
@@ -306,10 +339,7 @@ export const handleUserViewCounter = async(contractAddress:any) => {
 
     // Save the updated document
     await document.save();
-
-  
-    
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};

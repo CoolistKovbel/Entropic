@@ -8,7 +8,7 @@ const Page = async () => {
   const userProfile = {
     userAddress: userr.username?.substring(0, 8) || null,
 
-    userProfileImage: "/ephonite.png",
+    userProfileImage: userr.image || "/ephonite.png",
   };
 
   const userNFTArray = [

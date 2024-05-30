@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 interface IUser {
   username: string;
   useraccount: any;
-  seacretPhase: string;
   email: string;
   secretSignature: string;
   image: string;

@@ -59,6 +59,7 @@ const MintPage = ({ userSession }: MintPageProps) => {
     <div>
       {ContractData ? (
         <section className="bg-[#222] p-10 flex items-center">
+
           <div className="w-[50%]">
             <h2 className="text-4xl font-bold mb-4">
               {ContractData.collectionName}
@@ -68,9 +69,14 @@ const MintPage = ({ userSession }: MintPageProps) => {
               <Image src={ContractData.image} alt="nft collection image" fill />
             </div>
 
+            <div className="p-4 bg-[#111] rounded-lg drop-shadow-lg">
+
+            
+            <h6 className="mb-4 font-bold">Description:</h6>
             <p className="text-sm text-center mt-4">
               {ContractData.collectionDescription}
             </p>
+            </div>
           </div>
 
           <div className="w-[50%] flex flex-col bg-[#443] p-10 rounded-lg drop-shadow-lg">
@@ -108,6 +114,7 @@ const MintPage = ({ userSession }: MintPageProps) => {
               </div>
             </div>
           </div>
+
         </section>
       ) : (
         <div>
