@@ -63,6 +63,7 @@ const HeadernNav = ({ user }: HeaderNav) => {
             <div className="absolute top-0 right-0 bg-[#222] w-[200px] h-[300px] p-4">
              
               <Link href="/profile" className="text-md p-2 bg-[#333] w-full block text-center font-bold">Profile</Link>
+              <Link href="/settings" className="text-md p-2 bg-[#333] w-full block text-center font-bold">Settings</Link>
               
               <LogoutButton />
 

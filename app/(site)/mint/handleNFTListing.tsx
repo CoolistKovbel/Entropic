@@ -14,7 +14,6 @@ const HandleNFTListing = ({ userIsLogged }: HandleNFTListingProps) => {
     try {
       console.log("hate  my life");
       onOpen("CreateNFTListingtsxModel");
-      
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +33,7 @@ const HandleNFTListing = ({ userIsLogged }: HandleNFTListingProps) => {
           <select className="bg-[#222] p-3">
             <option value="most-minted">most minted</option>
             <option value="least-minted">least minted</option>
-            <option value="top-rated">top-rated</option>
+            <option value="most-interested">most-interested</option>
           </select>
 
           <Link

@@ -7,7 +7,7 @@ export default function Home() {
 
       <div className="flex flex-col w-full">
 
-        <div className="flex items-center gap-5 flex-col md:flex-row">
+        <div className="flex items-center gap-5 flex-col md:flex-row justify-around">
 
           <header className="bg-[#222] text-center p-10 rounded-lg w-full md:w-[60%]">
             <h1 className="text-[3rem] font-bold mb-2">Ephotopicup</h1>
@@ -23,6 +23,7 @@ export default function Home() {
           </div>
 
         </div>
+
       </div>
 
       {/* Latest Collection */}

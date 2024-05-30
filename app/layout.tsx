@@ -4,6 +4,7 @@ import { inter } from "./components/ui/fonts";
 import "./globals.css";
 import MainHeader from "./components/header/main-header";
 import { ModalProvider } from "./components/providers/model-provider";
+import FooterMain from "./components/footer";
 
 export const metadata: Metadata = {
   title: "Ephotopicup",
@@ -22,6 +23,7 @@ export default function RootLayout({
         <MainHeader />
         {children}
       </body>
+      <FooterMain />
       <ModalProvider />
     </html>
   );

@@ -49,10 +49,10 @@ const LatestCollection = () => {
       </header>
 
 
-      {latestCollections.map((item:any, index) => (
-        <div key={crypto.randomUUID()} className="bg-[#111] rounded-lg drop-shadow-lg  border-rounded-lg w-full">
+      {latestCollections.map((item:any) => (
+        <div key={crypto.randomUUID()} className="bg-[#111] p-10 rounded-lg drop-shadow-lg  border-rounded-lg w-full flex items-center gap-4">
 
-          <div className="p-5">
+          <div className="p-5 w-[60%] text-center">
 
             {/* Lattest collection */}
             <h2 className="text-4xl text-center font-bold mb-4">
@@ -82,7 +82,7 @@ const LatestCollection = () => {
 
           </div>
 
-          <form className="p-3 flex items-center justify-between" onSubmit={handleMintCurrentCollection}>
+          <form className="p-3 flex items-center flex-col justify-between w-[40%]" onSubmit={handleMintCurrentCollection}>
 
             <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg  flex flex-col     ">
               Token address:

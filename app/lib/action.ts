@@ -10,6 +10,7 @@ import dbConnect from "./db";
 import { redirect } from "next/navigation";
 import { writeFile } from "fs/promises";
 import { NFTListing } from "../models/Collection";
+import { revalidatePath } from "next/cache";
 
 export const getSession = async () => {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
@@ -200,13 +201,20 @@ export const getSpecfocContractDatra = async (contractAddress: any) => {
 
     await dbConnect();
 
-    const updatedDocument = await NFTListing.findOneAndUpdate(
-      { _id: contractAddress },
-      { $inc: { views: 1 } },
-      { new: true } // Return the updated document
-    ).lean();
+    const document = await NFTListing.findById(contractAddress);
 
-    return updatedDocument;
+    if (!document) {
+      throw new Error("Document not found");
+    }
+
+    // Increment views
+    document.views++;
+
+    // Save the updated document
+    await document.save();
+
+    return [document];
+
   } catch (error) {
     console.log(error);
     return "error grabbing contract";
@@ -230,5 +238,43 @@ export const handleInterestToggle = async (
     return updatedDocument;
   } catch (error) {
     console.log("error");
+  }
+};
+
+export const handleUserUpdate = async (
+  state: string | any,
+  formData: FormData
+) => {
+  const { userId, ...updatedFields } = Object.fromEntries(formData.entries());
+  try {
+    await dbConnect();
+    const userData = await getSession();
+
+    console.log(updatedFields, userId);
+
+    // Find the user by userId
+    const user: any = await User.findOne({ _id: userId });
+
+    if (!user) {
+      console.log("User not found");
+      return;
+    }
+
+    // Update the user's fields
+    Object.keys(updatedFields).forEach((key) => {
+      user[key] = updatedFields[key];
+    });
+
+    userData.username = user.username;
+
+    await user.save();
+
+    await userData.save();
+
+    revalidatePath("/settings");
+
+    console.log("User updated successfully:", user);
+  } catch (error) {
+    console.log(error);
   }
 };

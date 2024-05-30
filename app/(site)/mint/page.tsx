@@ -8,47 +8,7 @@ import Link from "next/link";
 const page = async () => {
   const userIsLogged = await getSession();
 
-  // const slowlife = [
-  //   {
-  //     collectionName: "Enphonite Collection",
-  //     tokenAddress: "0xBc77b0C4BCA055eea3c7e36D61B25725CaE3D3A5",
-  //     collectionTokenAddress: "0xd7eB556958F78DA37Dbade2AC1cA87Fd87ef1F0d",
-  //     collectionImageIpfs: "/QmT2HZLQYc6G2tZmBjiC4YMLs44LoQK53DtAChGSWCUmW9",
-  //     collectionImage: "/ephonite.png",
-  //     collectionDescription:
-  //       "This is a collection of 222 erc-721 tokens that a user can user to post on their wall or even use in future platform game. ",
-  //   },
-  //   {
-  //     collectionName: "EntropicScene Collection", // mint page
-  //     collectionImageIpfs: "/QmVtmo4YhX8HE7pPoVUeqH9gybYKAfUVVBpqk9zYdRKZT5",
-  //     tokenAddress: "0xB31cD539B812be9C4DDC881214e2CD29888de54F",
-  //     collectionRewardToken: "0x8F4eb6a6Bcfd5Af48aa9068a907c327e0e092BA4",
-  //     collectionImage: "/entropic-item.png",
-  //     collectionDescription:
-  //       "Welcome to the marketplace that allow you to trade between different types of nfts that are either items from different games, or club collectables, or items that you just want to seem to add to your collection of tokens. By holding this token you hold benifit of earning 1% trade fee from each transfers and  elgiable to put to stake to earn more rewards.",
-  //   },
-  //   {
-  //     collectionName: "Pinote Collection", // mint page
-  //     collectionImageIpfs: "/QmVtmo4YhX8HE7pPoVUeqH9gybYKAfUVVBpqk9zYdRKZT5",
-  //     tokenAddress: "0x44C086a84398fB0Be95fB09C07CA51Df501713eE",
-  //     collectionRewardToken: "0xE36C24D47b05037E33183570a86fb080f42f7415",
-  //     collectionImage: "/67.png",
-  //     collectionDescription:
-  //       "The Collection that lates you commuicate with 2 others in a coding compitetion to compete for a higher title..",
-  //   },
-  //   {
-  //     collectionName: " Collection", // mint page
-  //     collectionImageIpfs: "/QmVtmo4YhX8HE7pPoVUeqH9gybYKAfUVVBpqk9zYdRKZT5",
-  //     tokenAddress: "0xE36C24D47b05037E33183570a86fb080f42f7415",
-  //     collectionRewardToken: "0x3336deBc102ce50a707CF8Df8c626aB338D55539",
-  //     collectionImage: "/67.png",
-  //     collectionDescription:
-  //       "The Collection that lates you commuicate with 2 others in a coding compitetion to compete for a higher title..",
-  //   },
-  // ];
-
   // Grab latest collection
-
   const gg = await grabRecentCollection();
 
   return (
@@ -78,8 +38,12 @@ const page = async () => {
 
               <div className="w-full flex items-start gap-4 flex-col text-[12px]">
                 <p className="p-2 bg-[#333] rounded-lg">Total Holders: 0</p>
-                <p className="p-2 bg-[#333] rounded-lg">Total View: 0</p>
-                <p className="p-2 bg-[#333] rounded-lg">Total Interest: 0</p>
+                <p className="p-2 bg-[#333] rounded-lg">
+                  Total View: {gg[0].views}
+                </p>
+                <p className="p-2 bg-[#333] rounded-lg">
+                  Total Interest: {gg[0].interests.length}
+                </p>
               </div>
 
               <a
@@ -107,15 +71,16 @@ const page = async () => {
               <div className="text-center mt-10">
                 <div className="flex items-center justify-between gap-3 rounded-lg w-80% mb-4">
                   <p className="bg-[#111] p-3">
-                    views: <span>1000</span>
+                    views: <span>{item.views}</span>
                   </p>
                   <p className="bg-[#111] p-3">
-                    interest: <span>10</span>
+                    interest: <span>{item.interests.length}</span>
                   </p>
                   <p className="bg-[#111] p-3">
                     holders: <span>10</span>
                   </p>
                 </div>
+
                 <Link
                   href={`/mint/${item._id}`}
                   className="w-full bg-[#000] p-3 hover:bg-[#555] rounded-lg"

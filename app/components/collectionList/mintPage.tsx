@@ -13,24 +13,20 @@ interface MintPageProps {
 }
 
 const MintPage = ({ userSession }: MintPageProps) => {
-  const [ContractData, setContractData] = useState<any>([]);
+
   const pathname = usePathname();
+  const [ContractData, setContractData] = useState<any>([]);
   const contractAddress = pathname.split("/")[2];
-
-  console.log(ContractData);
-
+  
   const handleContractData = async (ed: any) => {
     try {
-      console.log("stupid dum fucking moron");
-
       const gg = await getSpecfocContractDatra(ed);
-
-      console.log(gg, "slow life");
-      setContractData(gg);
+      setContractData(gg[0]);
     } catch (error) {
       console.log(error);
     }
   };
+
 
   const handleInterest = async () => {
     try {
@@ -38,7 +34,7 @@ const MintPage = ({ userSession }: MintPageProps) => {
 
       const gg = await handleInterestToggle(contractAddress, userSession);
 
-      console.log(gg);
+      console.log(gg, "anything");
     } catch (error) {
       console.log(error);
     }
@@ -46,57 +42,71 @@ const MintPage = ({ userSession }: MintPageProps) => {
 
   useEffect(() => {
     const xx = async () => {
-      const stupid = await handleContractData(contractAddress);
-
-      console.log(stupid);
+      await handleContractData(contractAddress);
     };
 
     xx();
-  }, []);
+  }, [contractAddress]);
 
   return (
-    <section className="bg-[#222] p-10 flex items-center">
-      <div className="w-[50%]">
-        <div className="w-[300px] h-[300px] relative">
-          <Image src={ContractData.image} alt="nft collection image" fill />
-        </div>
-
-        <h2 className="text-2xl font-bold">{ContractData.collectionName}</h2>
-        <p className="text-sm">{ContractData.collectionDescription}</p>
-      </div>
-
-      <div className="w-[50%] flex flex-col">
-        <div>
-          <h2 className="text-2xl mb-2">
-            Address: {ContractData.collectionContractAddress}
-          </h2>
-          <h3>Views: {ContractData.views}</h3>
-
-          <form>
-            <label
-              htmlFor="mintAmount"
-              className="flex items-center justify-between"
-            >
-              <span className="text-xl">Mint</span>
-              <input type="amount" className="p-2 bg-[#000] text-xl" />
-            </label>
-            <button className="bg-[#111] p-2 rounded-lg">mint</button>
-          </form>
-        </div>
-
-        <div className="flex items-center justify-between mt-4">
-          <div className="flex items-center justify-between">
-            <span>interest: {ContractData.interests}</span>
-            <button
-              onClick={handleInterest}
-              className="bg-[#111] p-3 rounded-lg hover:bg-[#434]"
-            >
-              🌠
-            </button>
+    <div>
+      {ContractData ?  (
+        <section className="bg-[#222] p-10 flex items-center">
+          
+          <div className="w-[50%]">
+            <h2 className="text-4xl font-bold mb-4">{ContractData.collectionName}</h2>
+    
+            <div className="w-[300px] h-[300px] relative">
+              <Image src={ContractData.image} alt="nft collection image" fill />
+            </div>
+    
+            <p className="text-sm text-center mt-4">{ContractData.collectionDescription}</p>
           </div>
+    
+          <div className="w-[50%] flex flex-col bg-[#443] p-10 rounded-lg drop-shadow-lg">
+            <div>
+
+              <h2 className="text-2xl mb-2">
+                Address: {ContractData.collectionContractAddress}
+              </h2>
+
+              <h3 className="font-bold">Views: {ContractData.views}</h3>
+    
+              <form>
+                <label
+                  htmlFor="mintAmount"
+                  className="flex items-center justify-between mt-2"
+                >
+                  <span className="text-xl">Mint</span>
+                  <input type="amount" className="p-2 bg-[#000] text-xl" />
+                </label>
+    
+                <button className="bg-[#111] p-2 rounded-lg float-right mt-4">
+                  mint
+                </button>
+              </form>
+            </div>
+    
+            <div className="flex items-center justify-between mt-4">
+              <div className="flex items-center justify-between">
+                <span>interest: {ContractData.interests}</span>
+                <button
+                  onClick={handleInterest}
+                  className="bg-[#111] p-3 rounded-lg hover:bg-[#434]"
+                >
+                  🌠
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      ) : (
+        <div>
+          <h2>sucks</h2>
         </div>
-      </div>
-    </section>
+      )}
+    </div>
   );
 };
 

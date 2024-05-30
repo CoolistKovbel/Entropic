@@ -1,5 +1,6 @@
 import { grabLatestCollections } from "@/app/lib/action";
 import Image from "next/image";
+import Link from "next/link";
 
 
 const page = async () => {
@@ -25,7 +26,7 @@ const page = async () => {
           >
             
             <h2 className="text-2xl absolute bottom-[-40px] left-0 w-full bg-[#222] p-2 hover:bg-[#444]">
-              {item.collectionName}
+              <Link href={`/mint/${item._id}`}>{item.collectionName}</Link>
             </h2>
 
             <Image src={item.image} alt="sad life" fill />
