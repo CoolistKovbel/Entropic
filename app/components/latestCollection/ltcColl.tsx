@@ -5,7 +5,6 @@ import Image from "next/image";
 import { grabLatestCollections } from "@/app/lib/action";
 
 const LatestCollection = () => {
-
   const [latestCollections, setLatestCollections] = useState<any>([]);
 
   const handleMintCurrentCollection = async (e: any) => {
@@ -26,10 +25,8 @@ const LatestCollection = () => {
         const recentCo = await grabLatestCollections();
 
         setLatestCollections(recentCo);
-
       } catch (error) {
         console.log(error);
-
       }
     };
 
@@ -38,9 +35,7 @@ const LatestCollection = () => {
 
   return (
     <div className="w-full bg-[#222] p-4 ">
-
       <header className="w-full p-4 bg-[#111] rounded-lg">
-
         <h2 className="text-4xl font-bold">Recent Collections</h2>
 
         <p className="text-[14px]">
@@ -49,19 +44,19 @@ const LatestCollection = () => {
       </header>
 
       <div className="flex flex-col gap-10 flex-col-reverse h-fit mt-4 ">
+        {latestCollections.map((item: any) => (
+          <div
+            key={crypto.randomUUID()}
+            className="bg-[#111] p-10 rounded-lg drop-shadow-lg  border-rounded-lg w-full flex flex-col items-center gap-4"
+          >
 
-        {latestCollections.map((item:any) => (
-          <div key={crypto.randomUUID()} className="bg-[#111] p-10 rounded-lg drop-shadow-lg  border-rounded-lg w-full flex items-center gap-4">
-
-            <div className="p-5 w-[60%] text-center">
-
+            <div className="p-5 w-full md:w-[60%] text-center">
               {/* Lattest collection */}
               <h2 className="text-4xl text-center font-bold mb-4">
                 {item.collectionName}
               </h2>
 
               <div className="flex items-center gap-10 mb-4 md:flex-row flex-col ">
-
                 {/* Carrpsal */}
                 <div className="w-[250px] h-[250px] md:w-[300px] md:h-[300px] relative mb-4 ">
                   <Image src={item.image} alt="slow" fill />
@@ -71,7 +66,6 @@ const LatestCollection = () => {
                 <p className="w-full md:w-[50%] text-xl mb-4">
                   {item.collectionDescription}
                 </p>
-
               </div>
 
               <a
@@ -80,14 +74,17 @@ const LatestCollection = () => {
               >
                 Read More
               </a>
-
             </div>
 
-            <form className="p-3 flex items-center flex-col justify-between w-[40%]" onSubmit={handleMintCurrentCollection}>
-
-              <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg  flex flex-col     ">
+            <form
+              className="p-3 flex items-center flex-col justify-between w-full md:w-[40%]"
+              onSubmit={handleMintCurrentCollection}
+            >
+              <h2 className="text-xl font-bold p-4 bg-[#111] mb-2 drop-shadow-lg flex flex-col     ">
                 Token address:
-                <span className="text-[1rem] ml-2">{item.collectionContractAddress}</span>
+                <span className="text-[.8rem] ml-2">
+                  {item.collectionContractAddress}
+                </span>
               </h2>
 
               <div className="w-full items-center flex justify-center gap-4">
@@ -101,15 +98,11 @@ const LatestCollection = () => {
 
                 <button className="p-2 bg-[#333] rounded-lg">enter</button>
               </div>
-              
             </form>
-
+            
           </div>
         ))}
       </div>
-
-
-
     </div>
   );
 };
