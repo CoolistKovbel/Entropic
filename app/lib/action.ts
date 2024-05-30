@@ -266,12 +266,11 @@ export const handleUserUpdate = async (
   formData: FormData
 ) => {
   const { userId, ...updatedFields } = Object.fromEntries(formData.entries());
+
   try {
     await dbConnect();
     const userData = await getSession();
     let rest: any;
-
-    console.log(updatedFields.profileImage, userId);
 
     // Find the user by userId
     const user: any = await User.findOne({ _id: userId });
@@ -285,14 +284,17 @@ export const handleUserUpdate = async (
       const fileBuffer = await (
         updatedFields.profileImage as File
       ).arrayBuffer();
+
       const buffer = Buffer.from(fileBuffer);
+
       // set path
       const path = `${process.cwd()}/public/profileImages/${
-        crypto.randomUUID() + updatedFields.profileImage.name
+        crypto.randomUUID() + user.userId
       }`;
 
       // Write image
       await writeFile(path, buffer);
+
       rest = path.split(`${process.cwd()}/public`)[1];
     }
 
